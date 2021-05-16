@@ -87,6 +87,17 @@ export class App extends Component {
                   )}
                 />
 
+                {/* <Route
+                  exact
+                  path='/blog'
+                  render={(props) => (
+                    <Blog
+                      menu={this.state.menu}
+                      activeMenu={this.activeMenu.bind(this)}
+                    />
+                  )}
+                /> */}
+
                 <Route component={Error} />
               </Switch>
             </div>
@@ -100,7 +111,7 @@ export class App extends Component {
                 <i className='fab fa-github'></i>
               </a>
               <a
-                href='https://twitter.com/nuksi911'
+                href='https://twitter.com/nurudeenyekeen1'
                 target='_blank'
                 rel='noopener noreferrer'
               >

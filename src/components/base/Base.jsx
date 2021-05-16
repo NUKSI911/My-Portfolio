@@ -81,7 +81,7 @@ export class Base extends Component {
             </a>
 
             <a
-              href='https://twitter.com/nuksi911'
+              href='https://twitter.com/nurudeenyekeen1'
               target='_blank'
               rel='noopener noreferrer'
             >

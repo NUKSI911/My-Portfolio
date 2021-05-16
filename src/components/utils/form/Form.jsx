@@ -19,7 +19,7 @@ export class Form extends Component {
 
     return (
       <div>
-        <form name="contact" method="post" action="https://formspree.io/xqkyjgjr" onSubmit={this.submitForm} >
+        <form name="contact" method="post" action="https://formspree.io/f/xrgrplde" onSubmit={this.submitForm} >
           <input type="hidden" name="form-name" value="contact" />
           <div className="form_section">
             <label>
@@ -38,7 +38,7 @@ export class Form extends Component {
           <div className="form_section">
             <label>
               <span>Your Message*</span>
-              <textarea required name="message" rows="10"  minLength="30" ></textarea>
+              <textarea required name="message" rows="10"  minLength="10" ></textarea>
             </label>
           </div>
 

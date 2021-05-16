@@ -10,7 +10,7 @@
   #  from = "/*"
   #  to = "/index.html"
   #  status = 200
-
+[[redirects]]
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
   #[dev]

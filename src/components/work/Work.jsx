@@ -10,18 +10,18 @@ export class Work extends Component {
 
       {
         id: uuid(),
-        title: "Checkmate",
-        description: "Sign up portal for Checkmate Africa community",
+        title: "SUG AWARD",
+        description: "Sug Award Nomination App. ",
         github: "https://github.com/kadetXx/checkmate",
         live: "https://checkmate.africa/",
-        stack: "React + Styled Components",
+        stack: "Django + Vanilla JavaScript",
         isPrivate: false,
       },
 
       {
         id: uuid(),
-        title: "Birdbox",
-        description: "Social application with Real time Messaging",
+        title: "Expense Tracker",
+        description: "A platform with Real time Data Visualization Of your expense and buget planning features",
         github: "https://github.com/kadetXx/birdbox",
         live: "https://birdbox.space/",
         stack: "Vue + Socket.io + Express",

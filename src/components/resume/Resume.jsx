@@ -10,26 +10,25 @@ export class Resume extends Component {
   render() {
     const experience = [
       {
-        company: "Playarone",
+        company: "Hardcore Biometric",
         position: "Frontend Developer",
-        started: "September 2020",
-        ended: "Feburary 2021",
+        started: "February 2021",
+        ended: "Present",
         description:
-          "I Joined the Playarone engineering team in building an online gaming community.",
+          "I Joined the hardcore biometric team where I have had the opportunity of building enterprise standard web applications for various client .",
         achievements: [
           "Worked with React and SASS to build components from scratch",
           "Handled complex state management using react hooks",
-          "Worked closely with a senior dev to integrate graphQL and typescript.",
         ],
       },
 
       {
-        company: "Charisol",
+        company: "The OutSource Company",
         position: "Frontend Developer [Contract]",
-        started: "October 2020",
-        ended: "March 2021",
+        started: "February 2020",
+        ended: "February 2021",
         description:
-          "I worked with the charisol product team on a contract basis to build a web application for a fintech startup",
+          "I worked with the outsourse IT team on a contract basis to build a their web application and also helped maintianed their IT infrastruture",
         achievements: [
           "Transformed figma prototypes to functional UIs using react js, react context and sass",
           "Made use of tools like Notion & Usepastel for task management and feedback",
@@ -38,10 +37,10 @@ export class Resume extends Component {
       },
 
       {
-        company: "HNG Internships",
+        company: "The Outsource Company",
         position: "Frontend Developer [Intern]",
-        started: "May 2020",
-        ended: "August 2020",
+        started: "May 2018",
+        ended: "November 2018",
         description:
           "I contributed in developing user interfaces for quite a number of products within three months while learning new skills",
         achievements: [
@@ -56,10 +55,10 @@ export class Resume extends Component {
       <div className="resume">
         <div className="resume_container">
           <div className="top_row">
-            <h2>Collins Enebeli</h2>
+            <h2>Nurudeen Yekeen</h2>
             <div className="buttons">
               <a
-                href="https://www.linkedin.com/in/collins-enebeli-online/"
+                href="https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -68,7 +67,7 @@ export class Resume extends Component {
                 </small>
               </a>
               <a
-                href="https://drive.google.com/file/d/1tbgKQ8dsGmNXOR5Axb7vWhbOBDBA-3uV/view?usp=sharing"
+                href="https://drive.google.com/file/d/1VFe3rO1w9CtH8jgx29DTG1Q85yMXzui0/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -96,8 +95,8 @@ export class Resume extends Component {
 
           <div className="skills">
             <p>
-              HTML/CSS, SASS, Javascript [ES6], React Js, Next Js, Vue Js,
-              CSS-in-JS, GraphQL, Redux, Firebase.
+              HTML/CSS, SASS, Javascript [ES6], React Js, React Native,Next Js,
+              CSS-in-JS, GraphQL, Redux.
             </p>
           </div>
 
@@ -108,7 +107,7 @@ export class Resume extends Component {
 
           <div className="skills">
             <p>
-              Typescript, Flux, Node Js, Express, Web Sockets, PWAs, Wordpress,
+              Typescript, Flux, Node Js, Express, Web Sockets, PWAs,
               SEO.
             </p>
           </div>
@@ -158,10 +157,10 @@ export class Resume extends Component {
           <div className="exp_container">
             <section className="experience">
               <p className="title">
-                Federal University Of Petroleum Resources Effurun — B.Eng,
-                Marine Engineering
+                Federal University Of Technology Minna,Niger State — B.Eng,
+                Computer Engineering
                 <span>
-                  <br /> 2017-2022
+                  <br /> 2014-2019
                 </span>
               </p>
             </section>
@@ -177,7 +176,7 @@ export class Resume extends Component {
               <article className="description">
                 <p>
                   Links to my works can be found on <span> </span>{" "}
-                  <Link to="/work">kadet.dev/work</Link>{" "}
+                  <Link to="/work">nurudeen.netlify.app/work</Link>{" "}
                 </p>
               </article>
             </section>
