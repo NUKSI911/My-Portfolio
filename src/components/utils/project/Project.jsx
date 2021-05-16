@@ -17,7 +17,8 @@ export class Project extends Component {
           </div>
           
           <div className="project_links">
-         {isPrivate? '' :    <small><a href={live} target='_blank' rel="noopener noreferrer"> <i className="far fa-eye"></i> Live </a></small>}
+         { !live ? '' :    <small><a href={live} target='_blank' rel="noopener noreferrer"> <i className="far fa-eye"></i> Live </a></small>
+         }
             
             {isPrivate? '' :  (<small><a href={github} target='_blank' rel="noopener noreferrer"> <i className="fas fa-code-branch"></i> Code </a></small>)}
             

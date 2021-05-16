@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from '../../../assets/svgs/kadet.svg'
+import logo from '../../../assets/svgs/nurudeen.svg'
 import { Link } from 'react-router-dom'
 import './Header.css'
 
