@@ -18,7 +18,7 @@ export class Header extends Component {
       <div id='header'>
         <div className="header_wrapper">
           <div className="logo_container">
-            <a href="https://nurudeen.netlify.app"><img src={logo} alt="nurudeen logo"/></a>
+            <Link to={"/"}><img src={logo} alt="nurudeen logo" height="50"/></Link>
           </div>
 
           <div className="menu_btn_wrapper">

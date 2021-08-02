@@ -55,12 +55,12 @@ export class App extends Component {
           />
           <meta
             property="og:url"
-            content="https://nurudeen.tech"
+            content="https://www.nurudeen.dev"
           />
           <meta property="og:type" content="article" />
           <meta
             property="article:publisher"
-            content="https://nurudeen.tech"
+            content="https://www.nurudeen.dev"
           />
           <meta property="article:section" content="Coding,JavaScript" />
           <meta property="article:tag" content="Coding" />

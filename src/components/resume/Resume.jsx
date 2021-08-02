@@ -12,10 +12,10 @@ export class Resume extends Component {
       {
         company: "Hardcore Biometric",
         position: "Frontend Developer",
-        started: "February 2021",
-        ended: "Present",
+        started: "January 2021",
+        ended: "July 2021",
         description:
-          "I Joined the hardcore biometric team where I have had the opportunity of building enterprise standard web applications for various client .",
+          "I Joined the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .",
         achievements: [
           "Worked with React and SASS to build components from scratch",
           "Handled complex state management using react hooks",
@@ -52,35 +52,33 @@ export class Resume extends Component {
     ];
 
     return (
-      <div className="resume">
-        <div className="resume_container">
-          <div className="top_row">
+      <div className='resume'>
+        <div className='resume_container'>
+          <div className='top_row'>
             <h2>Nurudeen Yekeen</h2>
-            <div className="buttons">
+            <div className='buttons'>
               <a
-                href="https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+                href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
+                target='_blank'
+                rel='noopener noreferrer'>
                 <small>
-                  <i className="fab fa-linkedin"></i> <span>Linked In</span>
+                  <i className='fab fa-linkedin'></i> <span>Linked In</span>
                 </small>
               </a>
               <a
-                href="https://drive.google.com/file/d/1VFe3rO1w9CtH8jgx29DTG1Q85yMXzui0/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+                href='https://drive.google.com/file/d/1VFe3rO1w9CtH8jgx29DTG1Q85yMXzui0/view?usp=sharing'
+                target='_blank'
+                rel='noopener noreferrer'>
                 <small>
-                  <i className="fas fa-download"></i> <span>Download </span>
+                  <i className='fas fa-download'></i> <span>Download </span>
                 </small>
               </a>
             </div>
           </div>
 
-          <p className="subheading">Frontend Developer</p>
+          <p className='subheading'>Frontend Developer</p>
 
-          <div className="summary">
+          <div className='summary'>
             <p>
               I’m a Frontend software developer, passionate about transforming
               ideas from pixels to scalable products. I create functional
@@ -88,56 +86,53 @@ export class Resume extends Component {
             </p>
           </div>
 
-          <div className="divider">
+          <div className='divider'>
             <p>Core Technologies</p>
             <span></span>
           </div>
 
-          <div className="skills">
+          <div className='skills'>
             <p>
               HTML/CSS, SASS, Javascript [ES6], React Js, React Native,Next Js,
               CSS-in-JS, GraphQL, Redux.
             </p>
           </div>
 
-          <div className="divider">
+          <div className='divider'>
             <p>Familiar With</p>
             <span></span>
           </div>
 
-          <div className="skills">
-            <p>
-              Typescript, Flux, Node Js, Express, Web Sockets, PWAs,
-              SEO.
-            </p>
+          <div className='skills'>
+            <p>Typescript, Flux, Node Js, Express, Web Sockets, PWAs, SEO.</p>
           </div>
 
-          <div className="divider">
+          <div className='divider'>
             <p>On The Job</p>
             <span></span>
           </div>
 
-          <div className="skills">
+          <div className='skills'>
             <p>Scrum, CI/CD, Version Control, Best Practices</p>
           </div>
 
-          <div className="divider">
+          <div className='divider'>
             <p>Experience</p>
             <span></span>
           </div>
 
-          <div className="exp_container">
+          <div className='exp_container'>
             {experience.map((exp, index) => (
-              <section className="experience" key={index}>
-                <p className="title">
+              <section className='experience' key={index}>
+                <p className='title'>
                   {exp.company} - <i>{exp.position}</i>
                   <span>
-                    <br /> {exp.started.toUpperCase()} -{" "}
-                    {exp.ended === null ? "PRESENT" : exp.ended.toUpperCase()}
+                    <br /> {exp.started.toUpperCase()} -{' '}
+                    {exp.ended === null ? 'PRESENT' : exp.ended.toUpperCase()}
                   </span>
                 </p>
 
-                <article className="description">
+                <article className='description'>
                   <p> {exp.description} </p>
                   {exp.achievements.map((achievement, index) => (
                     <p key={index}>
@@ -149,14 +144,14 @@ export class Resume extends Component {
             ))}
           </div>
 
-          <div className="divider">
+          <div className='divider'>
             <p>Education</p>
             <span></span>
           </div>
 
-          <div className="exp_container">
-            <section className="experience">
-              <p className="title">
+          <div className='exp_container'>
+            <section className='experience'>
+              <p className='title'>
                 Federal University Of Technology Minna,Niger State — B.Eng,
                 Computer Engineering
                 <span>
@@ -166,32 +161,35 @@ export class Resume extends Component {
             </section>
           </div>
 
-          <div className="divider">
+          <div className='divider'>
             <p>Projects</p>
             <span></span>
           </div>
 
-          <div className="exp_container">
-            <section className="experience">
-              <article className="description">
+          <div className='exp_container'>
+            <section className='experience'>
+              <article className='description'>
                 <p>
-                  Links to my works can be found on <span> </span>{" "}
-                  <Link to="/work">nurudeen.netlify.app/work</Link>{" "}
+                  Links to my works can be found on <span> </span>{' '}
+                  <Link to='/work'>
+                    {' '}
+                    {`${window.location.hostname}/work`}{' '}
+                  </Link>{' '}
                 </p>
               </article>
             </section>
           </div>
         </div>
 
-        <div className="go_button_container">
-          <Link to="/contact">
+        <div className='go_button_container'>
+          <Link to='/contact'>
             <button>
-              <span class="material-icons">arrow_left</span> Contact
+              <span class='material-icons'>arrow_left</span> Contact
             </button>
           </Link>
-          <Link to="/">
+          <Link to='/'>
             <button>
-              Home <span class="material-icons">arrow_right</span>{" "}
+              Home <span class='material-icons'>arrow_right</span>{' '}
             </button>
           </Link>
         </div>

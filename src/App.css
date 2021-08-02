@@ -107,7 +107,7 @@ p {
 
 body {
   --h1-font: 2.5rem;
-  --h2-font: 36px;
+  --h2-font: 28px;
   --h3-font: 22px;
   --project-font: 19px;
   --semi-font: 16px;
@@ -119,7 +119,7 @@ body {
 @media (min-width: 1440px) {
   body {
     --h1-font: 3.2rem;
-    --h2-font: 42px;
+    --h2-font: 40px;
     --h3-font: 28px;
     --project-font: 25px;
     --semi-font: 22px;
