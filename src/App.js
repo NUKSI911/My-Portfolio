@@ -11,7 +11,6 @@ import Mobile from "./components/base/Mobile";
 import Header from "./components/utils/header/Header";
 import Error from "./components/error404/Error";
 import { Helmet } from "react-helmet";
-import ogImage from "./assets/img/nuru.jpg"
 export class App extends Component {
   state = {
     menu: ["active_menu", "", ""],
@@ -50,7 +49,6 @@ export class App extends Component {
           <meta property='og:description' content='Frontend Developer' />
           <meta property='og:url' content='https://www.nurudeen.dev' />
           <meta property='og:type' content='website' />
-          <meta property='og:image' content={ogImage} />
 
           <meta
             name='keywords'
@@ -63,8 +61,7 @@ export class App extends Component {
           <meta property='twitter:site' content='@nurudeenyekeen1' />
           <meta property='twitter:title' content='Nurudeen Yekeen Portfolio' />
           <meta property='twitter:description' content='Frontend Developer' />
-          <meta property='twitter:image' content={ogImage}   />
-        </Helmet>
+          </Helmet>
         <Router>
           <div
             className='mobile_container'
