@@ -63,7 +63,7 @@ export class App extends Component {
           <meta property='twitter:site' content='@nurudeenyekeen1' />
           <meta property='twitter:title' content='Nurudeen Yekeen Portfolio' />
           <meta property='twitter:description' content='Frontend Developer' />
-          <meta property='twitter:image' content='%PUBLIC_URL%/nuru.jpg' />
+          <meta property='twitter:image' content={ogImage} />
         </Helmet>
         <Router>
           <div
