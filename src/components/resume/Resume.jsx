@@ -10,43 +10,54 @@ export class Resume extends Component {
   render() {
     const experience = [
       {
-        company: "Hardcore Biometric",
-        position: "Frontend Developer",
-        started: "January 2021",
-        ended: "July 2021",
+        company: 'Formplus',
+        position: 'Frontend Developer',
+        started: 'July 2021',
+        ended: 'Present',
         description:
-          "I Joined the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .",
+          'Recently joined Formplus where I have been tasks with redesigning some critical pages  of their product',
         achievements: [
-          "Worked with React and SASS to build components from scratch",
-          "Handled complex state management using react hooks",
+          'Fixed some critical bugs',
+        ],
+      },
+      {
+        company: 'Hardcore Biometric',
+        position: 'Frontend Developer',
+        started: 'January 2021',
+        ended: 'July 2021',
+        description:
+          'Worked with the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .',
+        achievements: [
+          'Worked with React and SASS to build components from scratch',
+          'Handled complex state management using react hooks',
         ],
       },
 
       {
-        company: "The OutSource Company",
-        position: "Frontend Developer [Contract]",
-        started: "February 2020",
-        ended: "February 2021",
+        company: 'The OutSource Company',
+        position: 'Frontend Developer [Contract]',
+        started: 'February 2020',
+        ended: 'February 2021',
         description:
-          "I worked with the outsourse IT team on a contract basis to build a their web application and also helped maintianed their IT infrastruture",
+          'I worked with the outsourse IT team on a contract basis to build a their web application and also helped maintianed their IT infrastruture',
         achievements: [
-          "Transformed figma prototypes to functional UIs using react js, react context and sass",
-          "Made use of tools like Notion & Usepastel for task management and feedback",
-          "Interacted with GraphQL apis from the client side using Apollo GraphQL",
+          'Transformed figma prototypes to functional UIs using react js, react context and sass',
+          'Made use of tools like Notion & Usepastel for task management and feedback',
+          'Interacted with GraphQL apis from the client side using Apollo GraphQL',
         ],
       },
 
       {
-        company: "The Outsource Company",
-        position: "Frontend Developer [Intern]",
-        started: "May 2018",
-        ended: "November 2018",
+        company: 'The Outsource Company',
+        position: 'Frontend Developer [Intern]',
+        started: 'May 2018',
+        ended: 'November 2018',
         description:
-          "I contributed in developing user interfaces for quite a number of products within three months while learning new skills",
+          'I contributed in developing user interfaces for quite a number of products within three months while learning new skills and also provided IT support for staffs in the office' ,
         achievements: [
-          "Worked with node.js developers to build a certificate generator",
-          "Headed the frontend department of my team to deliver responsive web templates to be sold on envato market",
-          "Built an open source micro API project alongside python (Django) Developers using Jinja template engine on the frontend",
+          'Worked with node.js developers to build a certificate generator',
+          'Headed the frontend department of my team to deliver responsive web templates to be sold on envato market',
+          'Built an open source micro API project alongside python (Django) Developers using Jinja template engine on the frontend',
         ],
       },
     ];
@@ -155,7 +166,7 @@ export class Resume extends Component {
                 Federal University Of Technology Minna,Niger State — B.Eng,
                 Computer Engineering
                 <span>
-                  <br /> 2014-2019
+                  <br /> 2014-2019 <br /> Second Class Upper
                 </span>
               </p>
             </section>

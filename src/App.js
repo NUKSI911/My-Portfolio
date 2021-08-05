@@ -42,56 +42,36 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <Helmet>
-          <meta property="og:site_name" content="Nurudeen Yekeen" />
-          <meta
-            property="og:title"
-            content="Nurudeen Yekeen Portfolio"
-          />
-          <meta
-            property="og:description"
-            content="Frontend Developer"
-          />
-          <meta
-            property="og:url"
-            content="https://www.nurudeen.dev"
-          />
-          <meta property="og:type" content="article" />
-          <meta
-            property="article:publisher"
-            content="https://www.nurudeen.dev"
-          />
-          <meta property="article:section" content="Coding,JavaScript" />
-          <meta property="article:tag" content="Coding" />
-          {/* <meta
-            property="og:image"
-            content="https://res.cloudinary.com/fay/image/upload/w_1280,h_640,c_fill,q_auto,f_auto/w_860,c_fit,co_rgb:232129,g_west,x_80,y_-60,l_text:Source%20Sans%20Pro_70_line_spacing_-10_semibold:Anyone%20Can%20Map!%20Inspiration%20and%20an%20introduction%20to%20the%20world%20of%20mapping/blog-social-card-1.1"
-          />
-          <meta
-            property="og:image:secure_url"
-            content="https://res.cloudinary.com/fay/image/upload/w_1280,h_640,c_fill,q_auto,f_auto/w_860,c_fit,co_rgb:232129,g_west,x_80,y_-60,l_text:Source%20Sans%20Pro_70_line_spacing_-10_semibold:Anyone%20Can%20Map!%20Inspiration%20and%20an%20introduction%20to%20the%20world%20of%20mapping/blog-social-card-1.1"
-          /> */}
-          <meta property="og:image:width" content="1280" />
-          <meta property="og:image:height" content="640" />
-          <meta property="twitter:card" content="summary_large_image" />
-          {/* <meta
-            property="twitter:image"
-            content="https://res.cloudinary.com/fay/image/upload/w_1280,h_640,c_fill,q_auto,f_auto/w_860,c_fit,co_rgb:232129,g_west,x_80,y_-60,l_text:Source%20Sans%20Pro_70_line_spacing_-10_semibold:Anyone%20Can%20Map!%20Inspiration%20and%20an%20introduction%20to%20the%20world%20of%20mapping/blog-social-card-1.1"
-          /> */}
-          <meta property="twitter:site" content="@nurudeenyekeen1" />
+          <meta charSet='utf-8' />
+          <meta property='og:site_name' content='Nurudeen Yekeen' />
+          <meta property='og:title' content='Nurudeen Yekeen Portfolio' />
+          <meta property='og:description' content='Frontend Developer' />
+          <meta property='og:url' content='https://www.nurudeen.dev' />
+          <meta property='og:type' content='website' />
+          <meta property='og:image' content='%PUBLIC_URL%/nuru.jpg' />
+          
+          <meta name='keywords' content='Coding,JavaScript,React,Frontend,Developer,Web,Development,Nigeria' />
+          <meta property='article:tag' content='Coding' />
+          <meta property='og:image:width' content='1280' />
+          <meta property='og:image:height' content='640' />
+          <meta property='twitter:card' content='summary_large_image' />
+          <meta property='twitter:site' content='@nurudeenyekeen1' />
+          <meta property='twitter:title' content='Nurudeen Yekeen Portfolio' />
+          <meta property='twitter:description' content='Frontend Developer' />
+          <meta property='twitter:image' content='%PUBLIC_URL%/nuru.jpg' />
         </Helmet>
         <Router>
           <div
-            className="mobile_container"
-            id={this.state.fullScreen ? "fullscreen" : ""}
-          >
+            className='mobile_container'
+            id={this.state.fullScreen ? 'fullscreen' : ''}>
             <Header />
             <div>
               <Switch>
                 <Route
                   exact
-                  path="/"
+                  path='/'
                   render={(props) => (
                     <Mobile
                       menu={this.state.menu}
@@ -102,7 +82,7 @@ export class App extends Component {
 
                 <Route
                   exact
-                  path="/work"
+                  path='/work'
                   render={(props) => (
                     <Work
                       menu={this.state.menu}
@@ -113,7 +93,7 @@ export class App extends Component {
 
                 <Route
                   exact
-                  path="/resume"
+                  path='/resume'
                   render={(props) => (
                     <Resume
                       menu={this.state.menu}
@@ -124,7 +104,7 @@ export class App extends Component {
 
                 <Route
                   exact
-                  path="/contact"
+                  path='/contact'
                   render={(props) => (
                     <Contact
                       menu={this.state.menu}
@@ -148,37 +128,33 @@ export class App extends Component {
               </Switch>
             </div>
 
-            <div className="social_buttons">
+            <div className='social_buttons'>
               <a
-                href="https://github.com/nuksi911"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-github"></i>
+                href='https://github.com/nuksi911'
+                target='_blank'
+                rel='noopener noreferrer'>
+                <i className='fab fa-github'></i>
               </a>
               <a
-                href="https://twitter.com/nurudeenyekeen1"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-twitter"></i>
+                href='https://twitter.com/nurudeenyekeen1'
+                target='_blank'
+                rel='noopener noreferrer'>
+                <i className='fab fa-twitter'></i>
               </a>
               <a
-                href="https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-linkedin"></i>
+                href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
+                target='_blank'
+                rel='noopener noreferrer'>
+                <i className='fab fa-linkedin'></i>
               </a>
 
-              <div className="credits">
+              <div className='credits'>
                 <p>
                   Inspired by
                   <a
-                    href="https://sarahdayan.dev/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                    href='https://sarahdayan.dev/'
+                    target='_blank'
+                    rel='noreferrer noopener'>
                     Sarah Dayan
                   </a>
                 </p>
@@ -186,17 +162,17 @@ export class App extends Component {
             </div>
           </div>
 
-          <div className="container">
-            <div className="fixed">
+          <div className='container'>
+            <div className='fixed'>
               <Base menu={this.state.menu} />
             </div>
 
-            <div className="main">
-              <div className="pages_container">
+            <div className='main'>
+              <div className='pages_container'>
                 <Switch>
                   <Route
                     exact
-                    path="/"
+                    path='/'
                     render={(props) => (
                       <Work
                         menu={this.state.menu}
@@ -207,7 +183,7 @@ export class App extends Component {
 
                   <Route
                     exact
-                    path="/work"
+                    path='/work'
                     render={(props) => (
                       <Work
                         menu={this.state.menu}
@@ -218,7 +194,7 @@ export class App extends Component {
 
                   <Route
                     exact
-                    path="/resume"
+                    path='/resume'
                     render={(props) => (
                       <Resume
                         menu={this.state.menu}
@@ -229,7 +205,7 @@ export class App extends Component {
 
                   <Route
                     exact
-                    path="/contact"
+                    path='/contact'
                     render={(props) => (
                       <Contact
                         menu={this.state.menu}
