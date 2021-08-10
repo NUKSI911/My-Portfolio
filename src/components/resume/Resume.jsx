@@ -77,7 +77,7 @@ export class Resume extends Component {
                 </small>
               </a>
               <a
-                href='https://drive.google.com/file/d/1VFe3rO1w9CtH8jgx29DTG1Q85yMXzui0/view?usp=sharing'
+                href='https://drive.google.com/file/d/140AxWgmYAN_aiJIBHWKifrBC_WlYf4S4/view?usp=sharing'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <small>
@@ -182,10 +182,7 @@ export class Resume extends Component {
               <article className='description'>
                 <p>
                   Links to my works can be found on <span> </span>{' '}
-                  <Link to='/work'>
-                    {' '}
-                    {`${window.location.hostname}/work`}{' '}
-                  </Link>{' '}
+                  <Link to='/work'> {`${window.location.hostname}/work`} </Link>{' '}
                 </p>
               </article>
             </section>
