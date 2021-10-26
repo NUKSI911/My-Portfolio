@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./Resume.css";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Resume.css';
 
 export class Resume extends Component {
   componentDidMount() {
@@ -10,21 +10,10 @@ export class Resume extends Component {
   render() {
     const experience = [
       {
-        company: 'Formplus',
-        position: 'Frontend Developer',
-        started: 'July 2021',
-        ended: 'Present',
-        description:
-          'Recently joined Formplus where I have been tasks with redesigning some critical pages  of their product',
-        achievements: [
-          'Fixed some critical bugs',
-        ],
-      },
-      {
         company: 'Hardcore Biometric',
         position: 'Frontend Developer',
         started: 'January 2021',
-        ended: 'July 2021',
+        ended: 'Present',
         description:
           'Worked with the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .',
         achievements: [
@@ -39,10 +28,10 @@ export class Resume extends Component {
         started: 'February 2020',
         ended: 'February 2021',
         description:
-          'I worked with the outsourse IT team on a contract basis to build a their web application and also helped maintianed their IT infrastruture',
+          'I worked with the outsource IT team on a contract basis to build a their web application and also helped ma their IT infrastructure',
         achievements: [
           'Transformed figma prototypes to functional UIs using react js, react context and sass',
-          'Made use of tools like Notion & Usepastel for task management and feedback',
+          'Made use of tools like Notion & UsePastel for task management and feedback',
           'Interacted with GraphQL apis from the client side using Apollo GraphQL',
         ],
       },
@@ -53,7 +42,7 @@ export class Resume extends Component {
         started: 'May 2018',
         ended: 'November 2018',
         description:
-          'I contributed in developing user interfaces for quite a number of products within three months while learning new skills and also provided IT support for staffs in the office' ,
+          'I contributed in developing user interfaces for quite a number of products within three months while learning new skills and also provided IT support for staffs in the office',
         achievements: [
           'Worked with node.js developers to build a certificate generator',
           'Headed the frontend department of my team to deliver responsive web templates to be sold on envato market',
