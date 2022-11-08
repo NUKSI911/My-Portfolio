@@ -10,10 +10,38 @@ export class Resume extends Component {
   render() {
     const experience = [
       {
+        company: 'Lunchbox (Contract)',
+        position: 'Frontend Developer',
+        started: 'Nov 2021',
+        ended: 'Present',
+        description:
+          'Working on a new product for a large restaurant delivery service. The product is a web application that enable users to order different menu on various restaurant chain. I am working on the frontend of the application using React and Remix.',
+        achievements: [
+          'Refactor and convert codebase to typescript and fix ESLint warnings to create efficiency and reduce efforts spent by making codes easier to read and understand',
+          "Improve the platform's reliability by quickly fixing bugs and writing tests allowing for minimal impact on user experience",
+          'Revamp the user interface to match Figma design by effectively translating client requests into application designs and systems requirements.',
+          'Created accessible, responsive, and functional user interfaces to allow users on any device to have the same experienc',
+        ],
+      },
+      {
+        company: 'Formplus',
+        position: 'Frontend Developer',
+        started: 'July 2021',
+        ended: 'March 2022',
+        description:
+          'I worked as a frontend developer at Formplus. I worked on the frontend of the company’s products and also worked on the company’s website.',
+        achievements: [
+          'Improved the performance of our static website pages',
+          'mproved the authentication experience and ensured better reach on search engines through the blog and resources pages',
+          'Created user interface wireframes, a makeshift design system, and user flows to improve the look and feel across web pages, ensuring design consistency.',
+          'Started the migration of our legacy codebase in Angular JS to new architecture in React JS and a complete redesign',
+        ],
+      },
+      {
         company: 'Hardcore Biometric',
         position: 'Frontend Developer',
         started: 'January 2021',
-        ended: 'Present',
+        ended: 'July 2021',
         description:
           'Worked with the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .',
         achievements: [
@@ -28,7 +56,7 @@ export class Resume extends Component {
         started: 'February 2020',
         ended: 'February 2021',
         description:
-          'I worked with the outsource IT team on a contract basis to build a their web application and also helped ma their IT infrastructure',
+          'I worked with the outsource IT team on a contract basis to build a their web application and also help manage their IT infrastructure',
         achievements: [
           'Transformed figma prototypes to functional UIs using react js, react context and sass',
           'Made use of tools like Notion & UsePastel for task management and feedback',
