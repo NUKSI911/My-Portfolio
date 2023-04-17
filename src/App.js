@@ -130,7 +130,7 @@ export class App extends Component {
 
             <div className='social_buttons'>
               <a
-                href='https://github.com/nuksi911'
+                href='https://github.com/nurudeen38'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <i className='fab fa-github'></i>

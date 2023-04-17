@@ -86,7 +86,7 @@ export class Resume extends Component {
             <h2>Nurudeen Yekeen</h2>
             <div className='buttons'>
               <a
-                href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
+                href='https://drive.google.com/file/d/189aARPcXFnu4Z4j-WOPH8-t36ErlgC2t'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <small>
