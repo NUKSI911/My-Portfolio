@@ -20,7 +20,7 @@ export class Resume extends Component {
           'Refactor and convert codebase to typescript and fix ESLint warnings to create efficiency and reduce efforts spent by making codes easier to read and understand',
           "Improve the platform's reliability by quickly fixing bugs and writing tests allowing for minimal impact on user experience",
           'Revamp the user interface to match Figma design by effectively translating client requests into application designs and systems requirements.',
-          'Created accessible, responsive, and functional user interfaces to allow users on any device to have the same experienc',
+          'Created accessible, responsive, and functional user interfaces to allow users on any device to have the same experience',
         ],
       },
       {
@@ -46,7 +46,7 @@ export class Resume extends Component {
           'Worked with the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .',
         achievements: [
           'Worked with React and SASS to build components from scratch',
-          'Handled complex state management using react hooks',
+          'Handled complex state management using react hooks,X state and redux',
         ],
       },
 
@@ -94,7 +94,7 @@ export class Resume extends Component {
                 </small>
               </a>
               <a
-                href='https://drive.google.com/file/d/140AxWgmYAN_aiJIBHWKifrBC_WlYf4S4/view?usp=sharing'
+                href='https://drive.google.com/file/d/1EMP7puFnonMzdBTXhyfTpRkk2UDo5uRK/view?usp=drivesdk'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <small>
@@ -122,7 +122,7 @@ export class Resume extends Component {
           <div className='skills'>
             <p>
               HTML/CSS, SASS, Javascript [ES6], React Js, React Native,Next Js,
-              CSS-in-JS, GraphQL, Redux.
+              CSS-in-JS, GraphQL, Redux,Tailwind,Gatsby,Remix,Typescript.
             </p>
           </div>
 
@@ -132,7 +132,7 @@ export class Resume extends Component {
           </div>
 
           <div className='skills'>
-            <p>Typescript, Flux, Node Js, Express, Web Sockets, PWAs, SEO.</p>
+            <p> Node Js, Express, Web Sockets, PWAs, SEO.</p>
           </div>
 
           <div className='divider'>

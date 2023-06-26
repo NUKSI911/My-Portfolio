@@ -52,7 +52,7 @@ export class App extends Component {
 
           <meta
             name='keywords'
-            content='Coding,JavaScript,React,Frontend,Developer,Web,Development,Nigeria'
+            content='Coding,JavaScript,React,Frontend,Developer,Web,Development,Nigeria,Remote'
           />
           <meta property='article:tag' content='Coding' />
           <meta property='og:image:width' content='1280' />
