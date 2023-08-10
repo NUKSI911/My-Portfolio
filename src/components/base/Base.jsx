@@ -72,7 +72,7 @@ export class Base extends Component {
           <img src={logo} alt='' />
           <div className='social'>
             <a
-              href='https://github.com/nuksi911'
+              href='https://github.com/nurudeen38'
               target='_blank'
               rel='noopener noreferrer'
             >

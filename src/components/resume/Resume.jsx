@@ -15,12 +15,12 @@ export class Resume extends Component {
         started: 'Nov 2021',
         ended: 'Present',
         description:
-          'Working on a new product for a large restaurant delivery service. The product is a web application that enable users to order different menu on various restaurant chain. I am working on the frontend of the application using React and Remix.',
+          'Developed a web application for a prominent restaurant delivery service, facilitating users to order from various restaurant chains',
         achievements: [
-          'Refactor and convert codebase to typescript and fix ESLint warnings to create efficiency and reduce efforts spent by making codes easier to read and understand',
-          "Improve the platform's reliability by quickly fixing bugs and writing tests allowing for minimal impact on user experience",
-          'Revamp the user interface to match Figma design by effectively translating client requests into application designs and systems requirements.',
-          'Created accessible, responsive, and functional user interfaces to allow users on any device to have the same experience',
+          'Restructured codebase into TypeScript, enhancing readability and maintainability.',
+          'Enhanced platform reliability through bug fixes and comprehensive testing, ensuring minimal impact on user experience.',
+          'Translated client requirements into effective UI designs, aligning the application with Figma specifications.',
+          'Designed responsive, accessible UIs to provide consistent user experiences across devices.',
         ],
       },
       {
@@ -29,12 +29,11 @@ export class Resume extends Component {
         started: 'July 2021',
         ended: 'March 2022',
         description:
-          'I worked as a frontend developer at Formplus. I worked on the frontend of the company’s products and also worked on the company’s website.',
+          'Contributed as a frontend developer at Formplus, working on both product and website frontend.',
         achievements: [
-          'Improved the performance of our static website pages',
-          'mproved the authentication experience and ensured better reach on search engines through the blog and resources pages',
-          'Created user interface wireframes, a makeshift design system, and user flows to improve the look and feel across web pages, ensuring design consistency.',
-          'Started the migration of our legacy codebase in Angular JS to new architecture in React JS and a complete redesign',
+          'Improved website performance by introducing browser caching and server-side caching reducing page load time by 65%',
+          'Enhanced authentication experience and search engines visibility through implementing user-friendly and streamlined authentication processes and search engine optimization techniques such as optimized sitemaps and backlinks',
+          'Co-led the initiative to migrate the frontend from AngularJS to React, resulting in faster page speed, cleaner code  architecture, and better developer experience.',
         ],
       },
       {
@@ -45,8 +44,10 @@ export class Resume extends Component {
         description:
           'Worked with the hardcore biometric team where I  had the opportunity of building enterprise standard web applications for various client .',
         achievements: [
-          'Worked with React and SASS to build components from scratch',
-          'Handled complex state management using react hooks,X state and redux',
+          'Led the design and development of multiple enterprise-level microservice applications for all clients reducing development time across company team and product scalability.',
+          'Responsible for negotiating liability both in writing and on the phone with clients, claimants and their representatives.',
+          'Responsible for screening potential frontend hires, alongside conducting multiple interviews with emphasis on frontend roles.',
+          'Boosted code coverage to more than 90% by writing units and integrated test using jest, react testing library and cypress.',
         ],
       },
 
@@ -58,9 +59,11 @@ export class Resume extends Component {
         description:
           'I worked with the outsource IT team on a contract basis to build a their web application and also help manage their IT infrastructure',
         achievements: [
-          'Transformed figma prototypes to functional UIs using react js, react context and sass',
+          "Using React as the frontend framework in developing the frontend of various top-notch projects for both local and international clients for the company rising the company's revenue by 5%.",
           'Made use of tools like Notion & UsePastel for task management and feedback',
-          'Interacted with GraphQL apis from the client side using Apollo GraphQL',
+          'Adopted code-splitting for enhanced web performance such as; Lazy coding, Error boundaries, Memoization (Memo, useMemo ,useCallback), hooks etc. ',
+          'Participated in code reviews on standards, best practices and following architectural patterns of the FE codebases.',
+          'Maintained organization infrastructure and solved IT-related issue.',
         ],
       },
 
@@ -86,7 +89,7 @@ export class Resume extends Component {
             <h2>Nurudeen Yekeen</h2>
             <div className='buttons'>
               <a
-                href='https://drive.google.com/file/d/189aARPcXFnu4Z4j-WOPH8-t36ErlgC2t'
+                href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <small>
@@ -94,7 +97,7 @@ export class Resume extends Component {
                 </small>
               </a>
               <a
-                href='https://drive.google.com/file/d/1EMP7puFnonMzdBTXhyfTpRkk2UDo5uRK/view?usp=drivesdk'
+                href='https://drive.google.com/file/d/1tEoSU-fDM_DuKTmctoGyx8QVmGwawZO9/view?usp=sharing'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <small>

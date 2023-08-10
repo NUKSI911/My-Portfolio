@@ -1,47 +1,49 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./Work.css";
-import Project from "../utils/project/Project";
-import uuid from "react-uuid";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './Work.css';
+import Project from '../utils/project/Project';
+import uuid from 'react-uuid';
 
 export class Work extends Component {
   state = {
     projects: [
-
       {
         id: uuid(),
-        title: "SUG AWARD",
-        description: "Sug Award Nomination App. ",
-        github: "https://github.com/NUKSI911/SUG-POLL-WEBSITE",
-        stack: "Django + Vanilla JavaScript",
+        title: 'DAAL Bil',
+        description:
+          'Developed and maintained DAAL Bil website, a leading online marketplace for used cars in Sweden.Utilized Nextjs and Storyblok CMX for development.',
+        live: 'https://daalbil.se',
+        stack: 'Nextjs + StoryBlok CMS + Typescript + linara',
         isPrivate: false,
       },
 
       {
         id: uuid(),
-        title: "Expense Tracker",
-        description: "A platform with  Real time Data Visualization of expenses",
-        github: "https://github.com/NUKSI911/Expense-Tracker",
-        stack: "React + Material UI + Victory + Express +NodeJS ",
+        title: 'Mileprix',
+        description:
+          'Successfully developed and launched a comprehensive website independently within a tight deadline of 3 weeks. Leveraged cutting-edge technology by utilizing Next.js13, integrated Open Graph and Twitter Card meta tags for enhanced social media sharing capabilities.',
+        live: ' https://mileprix.com',
+        stack: 'React + NextJS13  + Tailwind+ NodeJS ',
         isPrivate: false,
       },
 
       {
         id: uuid(),
-        title: "EndSars",
-        description: "Web app to support the #EndSARS campaign",
-        github: "https://github.com/NUKSI911/endsars",
-        live: "https://endsars.vercel.app/",
-        stack: "React",
+        title: 'Utopeon',
+        description:
+          'A decentralized gaming platform that enables gamers make money online by participating in completions.',
+        live: 'https://www.utopeon.com',
+        stack: 'React + Typescript + Trpc + Tailwind + Web3',
         isPrivate: false,
       },
 
       {
         id: uuid(),
-        title: "Abuja Car Shop",
-        description: "Ecommerce  App",
-        github: "https://github.com/NUKSI911/SUG-POLL-WEBSITE",
-        stack: " Django + React + SASS",
+        title: 'Saido',
+        description:
+          'A Yaml based tool for monitoring metrics across multiple host.',
+        github: 'https://github.com/bisohns/saido',
+        stack: ' Material UI + React + SASS + SocketIO',
         isPrivate: false,
       },
     ],
