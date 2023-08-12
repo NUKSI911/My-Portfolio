@@ -21,9 +21,9 @@ export class Work extends Component {
         id: uuid(),
         title: 'Mileprix',
         description:
-          'Successfully developed and launched a comprehensive website independently within a tight deadline of 3 weeks. Leveraged cutting-edge technology by utilizing Next.js13, integrated Open Graph and Twitter Card meta tags for enhanced social media sharing capabilities.',
+          'Successfully developed and launched a feature-rich website within an ambitious 3-week time-frame.',
         live: ' https://mileprix.com',
-        stack: 'React + NextJS13  + Tailwind+ NodeJS ',
+        stack: 'React + Nextjs13  + Tailwind+ NodeJS ',
         isPrivate: false,
       },
 
