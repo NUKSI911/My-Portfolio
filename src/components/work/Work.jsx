@@ -11,7 +11,7 @@ export class Work extends Component {
         id: uuid(),
         title: 'DAAL Bil',
         description:
-          'Developed and maintained DAAL Bil website, a leading online marketplace for used cars in Sweden.Utilized Nextjs and Storyblok CMX for development.',
+          'Developed and maintained DAAL Bil website, a leading online marketplace for used cars in Sweden.Utilized Nextjs and Storyblok CMS for development.',
         live: 'https://daalbil.se',
         stack: 'Nextjs + StoryBlok CMS + Typescript + linara',
         isPrivate: false,
