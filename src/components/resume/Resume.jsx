@@ -91,15 +91,17 @@ export class Resume extends Component {
               <a
                 href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
                 target='_blank'
-                rel='noopener noreferrer'>
+                rel='noopener noreferrer'
+              >
                 <small>
                   <i className='fab fa-linkedin'></i> <span>Linked In</span>
                 </small>
               </a>
               <a
-                href='https://drive.google.com/u/0/uc?id=1JYWozhHN4NdtHIZkRDvrzy4d8XjeKMFs&export=download'
+                https:href='https://drive.google.com/u/0/uc?id=15QXB1ASqBgQnzlQd4t4477XJ4zMMLw87&export=download'
                 target='_blank'
-                rel='noopener noreferrer'>
+                rel='noopener noreferrer'
+              >
                 <small>
                   <i className='fas fa-download'></i> <span>Download </span>
                 </small>

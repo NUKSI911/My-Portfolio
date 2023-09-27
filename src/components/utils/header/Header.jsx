@@ -35,15 +35,15 @@ export class Header extends Component {
               <div className="mobile_menu_container">
                 <ul>
                   <li><Link to='/' onClick={this.toggleMenu.bind(this)}>Home</Link> </li>
-                  <li><Link to='/work' onClick={this.toggleMenu.bind(this)}>Work</Link> </li>
-                  <li><Link to='/resume' onClick={this.toggleMenu.bind(this)}>Résumé</Link> </li>
+                  <li><Link to='/work' onClick={this.toggleMenu.bind(this)}>Projects</Link> </li>
+                  <li><Link to='/resume' onClick={this.toggleMenu.bind(this)}>Work</Link> </li>
                   <li><Link to='/contact' onClick={this.toggleMenu.bind(this)}>Contact</Link> </li>
                 </ul>
 
                 <div className="social_box">
                 <h3>Connect With Me</h3>
                   <div className="social_icons">
-                    <a href="https://github.com/nuksi911"><i className='fab fa-github'></i></a> 
+                    <a href="https://github.com/nurudeen38"><i className='fab fa-github'></i></a> 
                     <a href="https://twitter.com/nurudeenyekeen1"><i className='fab fa-twitter'></i></a>
                     <a href="https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/"><i className="fab fa-linkedin"></i></a>
                   </div>
