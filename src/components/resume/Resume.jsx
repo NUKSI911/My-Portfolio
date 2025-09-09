@@ -15,7 +15,7 @@ export class Resume extends Component {
         started: "Apr 2024",
         ended: "Jul 2025",
         description:
-          "served as a Senior Frontend Engineer, leading the development and optimization of high-impact digital banking platforms.",
+          "Served as a Senior Frontend Engineer, leading the development and optimization of high-impact digital banking platforms.",
         achievements: [
           "Led the development and enhancement of critical user journeys across multiple digital banking platforms, delivering seamless and secure experiences that supported high user retention and operational efficiency.",
           "Architected and implemented scalable, reusable, and maintainable UI components using Angular (v2+), resulting in reduced development time across multiple projects.",
