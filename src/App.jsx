@@ -136,7 +136,7 @@ export class App extends Component {
                 <i className='fab fa-github'></i>
               </a>
               <a
-                href='https://twitter.com/nurudeenyekeen1'
+                href='https://twitter.com/shadeof_deen'
                 target='_blank'
                 rel='noopener noreferrer'>
                 <i className='fab fa-twitter'></i>

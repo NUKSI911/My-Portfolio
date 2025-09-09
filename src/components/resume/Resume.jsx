@@ -135,7 +135,7 @@ export class Resume extends Component {
                 </small>
               </a>
               <a
-                https:href="https://drive.google.com/u/0/uc?id=15QXB1ASqBgQnzlQd4t4477XJ4zMMLw87&export=download"
+                https:href="https://drive.google.com/file/d/131I93tP-4xfOeN0zQ13q0lDcZrNJ0jjc/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
               >
