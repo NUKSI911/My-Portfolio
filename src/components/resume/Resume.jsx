@@ -150,7 +150,7 @@ export class Resume extends Component {
 
           <div className="summary">
             <p>
-              I’m a Frontend software developer, passionate about transforming
+              I’m a Senior Frontend software developer, passionate about transforming
               ideas from pixels to scalable products. I create functional
               applications with user experience as top priority.
             </p>
@@ -163,7 +163,7 @@ export class Resume extends Component {
 
           <div className="skills">
             <p>
-              HTML/CSS, SASS, Javascript [ES6], React Js, React Native,Next Js,
+              HTML/CSS, SASS, Javascript [ES6], React Js, React Native,Next Js, Angular,
               CSS-in-JS, GraphQL, Redux,Tailwind,Gatsby,Remix,Typescript.
             </p>
           </div>
@@ -183,7 +183,7 @@ export class Resume extends Component {
           </div>
 
           <div className="skills">
-            <p>Scrum, CI/CD, Version Control, Best Practices</p>
+            <p>Scrum, Testing, CI/CD, Version Control, Best Practices</p>
           </div>
 
           <div className="divider">
