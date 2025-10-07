@@ -89,7 +89,7 @@ const Base = ({ menu }) => {
           </a>
 
           <a
-            href='https://twitter.com/nurudeenyekeen1'
+            href='https://x.com/shadeof_deen'
             target='_blank'
             rel='noopener noreferrer'
           >
