@@ -1,46 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Blog.css';
+import { articles } from '../../data/articles';
 
 const Articles = ({ activeMenu }) => {
-  const [posts] = useState([
-    {
-      id: 1,
-      title: "Building Modern React Applications with Vite: A Senior Engineer's Perspective",
-      excerpt: "Learn how to set up and optimize React applications using Vite for lightning-fast development and builds.",
-      date: "2024-01-15",
-      readTime: "5 min read",
-      category: "Development",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "CSS Grid vs Flexbox: When to Use What",
-      excerpt: "A comprehensive guide to understanding the differences between CSS Grid and Flexbox and when to use each.",
-      date: "2024-01-10",
-      readTime: "7 min read",
-      category: "CSS",
-      featured: false
-    },
-    {
-      id: 3,
-      title: "JavaScript ES6+ Features Every Developer Should Know",
-      excerpt: "Explore essential ES6+ features that will make your JavaScript code more modern and efficient.",
-      date: "2024-01-05",
-      readTime: "8 min read",
-      category: "JavaScript",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Responsive Design Best Practices in 2024",
-      excerpt: "Modern approaches to creating responsive designs that work across all devices and screen sizes.",
-      date: "2024-01-01",
-      readTime: "6 min read",
-      category: "Design",
-      featured: false
-    }
-  ]);
+  const [posts] = useState(articles);
 
   useEffect(() => {
     activeMenu(2);

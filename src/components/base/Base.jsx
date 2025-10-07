@@ -22,7 +22,7 @@ const Base = ({ menu }) => {
         <div className='description'>
           <p>
             <span>
-              I'm a <span className='highlight'>frontend developer</span>. I create interactive <span className="highlight two">experiences</span> for amazing people using <span className="highlight">technology</span>. I enjoy tweaking <span className="highlight two">stylesheets</span> and crafting <span className="highlight">layouts</span> to achieve <span className="highlight two">desired</span> aesthetics.
+              <span className='highlight'>Senior Frontend Engineer</span> focused on transforming business visions into <span className="highlight two">elegant, high-performance web applications.</span><span className="highlight"> I build interactive and accessible digital experiences </span> that are both <span className="highlight two"> user-centric and aesthetically precise.</span>
             </span>
           </p>
         </div>
@@ -98,7 +98,7 @@ const Base = ({ menu }) => {
           </a>
         </div>
 
-      
+
       </div>
     </div>
   );
