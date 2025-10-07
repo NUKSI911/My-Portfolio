@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ArticleDetail.css';
-import { articles } from '../../data/articles';
+import { articles } from '../../constant/articles';
 
 const ArticleDetail = () => {
     const { id } = useParams();

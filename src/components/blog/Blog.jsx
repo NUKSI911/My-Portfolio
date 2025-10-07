@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Blog.css';
-import { articles } from '../../data/articles';
+import { articles } from '../../constant/articles';
 
 const Articles = ({ activeMenu }) => {
   const [posts] = useState(articles);
