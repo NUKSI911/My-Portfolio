@@ -41,7 +41,7 @@ const Header = () => {
               <h3>Connect With Me</h3>
                 <div className="social_icons">
                   <a href="https://github.com/nurudeen38"><i className='fab fa-github'></i></a> 
-                  <a href="https://twitter.com/nurudeenyekeen1"><i className='fab fa-twitter'></i></a>
+                  <a href="https://x.com/shadeof_deen"><i className='fab fa-twitter'></i></a>
                   <a href="https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/"><i className="fab fa-linkedin"></i></a>
                 </div>
               </div>
