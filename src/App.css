@@ -46,6 +46,10 @@ html, body {
   overflow: hidden;
 }
 
+.App:has(.article-detail-container) {
+  overflow: scroll;
+}
+
 .container {
   height: 100%;
   display: flex;

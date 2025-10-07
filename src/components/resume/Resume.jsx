@@ -1,14 +1,13 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Resume.css";
 
-export class Resume extends Component {
-  componentDidMount() {
-    this.props.activeMenu(1);
-  }
+const Resume = ({ activeMenu }) => {
+  useEffect(() => {
+    activeMenu(1);
+  }, []);
 
-  render() {
-    const experience = [
+  const experience = [
       {
         company: "Banque Misr (Contract)",
         position: "Senior Frontend Engineer",
@@ -119,7 +118,7 @@ export class Resume extends Component {
       },
     ];
 
-    return (
+  return (
       <div className="resume">
         <div className="resume_container">
           <div className="top_row">
@@ -251,18 +250,17 @@ export class Resume extends Component {
         <div className="go_button_container">
           <Link to="/contact">
             <button>
-              <span class="material-icons">arrow_left</span> Contact
+              <span className="material-icons">arrow_left</span> Contact
             </button>
           </Link>
           <Link to="/">
             <button>
-              Home <span class="material-icons">arrow_right</span>{" "}
+              Home <span className="material-icons">arrow_right</span>{" "}
             </button>
           </Link>
         </div>
       </div>
     );
-  }
-}
+};
 
 export default Resume;

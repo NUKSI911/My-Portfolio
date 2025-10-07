@@ -1,24 +1,25 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import Base from './Base'
 import './Mobile.css'
 
-export class Mobile extends Component {
+const Mobile = ({ menu, fullScreen }) => {
+  useEffect(() => {
+    if(!
+      fullScreen
+    ){
+      fullScreen(true);
+    }
+    
+    return () => {
+      fullScreen(false);
+    };
+  }, []);
 
-  render() {
-    return (
-      <div id='mobile'>
-        <Base menu={this.props.menu} />
-      </div>
-    )
-  }
-
-  componentDidMount() {
-    this.props.fullScreen(true)
-  }
-
-  componentWillUnmount() {
-    this.props.fullScreen(false);
-  }
+  return (
+    <div id='mobile'>
+      <Base menu={menu} />
+    </div>
+  )
 }
 
 export default Mobile
