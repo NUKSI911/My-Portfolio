@@ -178,6 +178,34 @@
   line-height: 1.6;
 }
 
+/* Next Article Navigation */
+.article-next-nav {
+  margin-top: 2rem;
+}
+
+.article-next-label { color: #9a9aa0; font-size: 0.95rem; }
+
+.next-article-button {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(102, 126, 234, 0.6);
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.next-article-button:hover {
+  transform: translateY(-1px);
+  background: rgba(102, 126, 234, 0.12);
+  border-color: rgba(102, 126, 234, 0.8);
+}
+
+.next-article-title { font-size: 0.95rem; font-weight: 600; color: #e9e9f1; }
+
+.next-article-arrow { color: #667eea; font-size: 1.1rem; margin-left: 0.5rem; }
+
 /* Article Not Found */
 .article-not-found {
   text-align: center;
@@ -253,4 +281,5 @@
     font-size: 1.2rem;
   }
 }
+
 

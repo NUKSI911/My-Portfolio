@@ -1,18 +1,18 @@
 export const articles = [
-    {
-        id: 1,
-        title: "Architecting Scalable React Applications with Vite",
-        excerpt: "Beyond basic setup: advanced patterns and production-ready configurations for building enterprise-grade React applications with Vite.",
-        content: `
-        <p>After shipping dozens of production applications, I've found that Vite isn't just another build tool—it's a fundamental shift in how we think about frontend tooling. The difference between a basic Vite setup and a production-optimized configuration is what separates hobby projects from enterprise-grade applications.</p>
-        
-        <h3>Why Vite is Production-Ready</h3>
-        <p>While most tutorials focus on development speed, Vite's real power emerges in production. The Rollup-based build pipeline generates optimized bundles that often outperform Webpack equivalents by 15-20% in real-world scenarios. I've measured this across multiple client projects with complex dependency trees.</p>
-        
-        <h3>Advanced Configuration Patterns</h3>
-        <p>Here's how I structure Vite configurations for large-scale applications:</p>
-        
-        <pre><code>// vite.config.js
+ {
+    "id": 1,
+    "title": "Architecting Scalable React Applications with Vite",
+    "excerpt": "Moving beyond the basic setup: a deep dive into the advanced patterns and strategic thinking required for building enterprise-grade React applications with Vite.",
+    "content": `
+          <p>In my career, building for clients ranging from major financial institutions like <strong>Banque Misr</strong> to global restaurant platforms, I've learned that tool selection is a strategic decision, not just a technical one. We've all felt the pain of slow builds and bloated bundles in large-scale Webpack configurations. Adopting Vite represented a fundamental shift in our frontend tooling philosophy—from fighting the toolchain to having it work for us. But the real challenge, and where most teams stumble, isn't the initial setup; it's bridging the gap between a fast dev server and a robust, optimized, and <em>truly</em> enterprise-ready production build.</p>
+          
+          <h3>Why Vite is a Strategic Advantage, Not Just a Fast Dev Tool</h3>
+          <p>While the near-instant HMR is what grabs headlines, Vite's production bundling—powered by Rollup—is its unsung hero. In enterprise environments, where dependency trees are complex and performance budgets are strict, I've consistently seen Vite outputs outperform our previous Webpack builds by 15-20% on real-world metrics like Time to Interactive. This wasn't just theoretical; at Banque Misr, this strategic optimization, combined with a thoughtful chunking strategy, was a key factor in our <strong>65% reduction in initial load time</strong>, directly impacting user engagement and satisfaction.</p>
+          
+          <h3>The Architecture of an Enterprise Vite Config</h3>
+          <p>Configuration at this scale is less about writing code and more about making informed, strategic decisions. The code snippet below isn't just a config; it's a manifestation of several key principles I've honed across multi-tenant platforms:</p>
+          
+           <pre><code>// vite.config.js
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -20,7 +20,8 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           utils: ['lodash-es', 'date-fns'],
-          state: ['@tanstack/react-query', 'zustand']
+          state: ['@tanstack/react-query', 'zustand'],
+          charts: ['recharts', 'd3-shape'] // For financial dashboards
         }
       }
     },
@@ -28,726 +29,816 @@ export default defineConfig({
     reportCompressedSize: false
   },
   plugins: [
-    // Critical for monitoring bundle health
-    visualizer({ filename: 'dist/stats.html' })
-  ]
+    // Critical for monitoring bundle health in enterprise environments
+    visualizer({ 
+      filename: 'dist/stats.html',
+      gzipSize: true,
+      brotliSize: true
+    })
+  ],
+  // Enterprise-specific optimizations
+  optimizeDeps: {
+    include: ['@angular/core', '@angular/common'], // For hybrid migrations
+    exclude: ['heavy-analytics-library'] // Exclude from pre-bundling
+  }
 })</code></pre>
-        
-        <h3>Performance Deep Dive</h3>
-        <p>Most teams miss these critical optimizations:</p>
-        <ul>
-          <li><strong>Dependency Pre-bundling:</strong> Vite's esbuild integration transforms CommonJS dependencies during dev, but you need to explicitly exclude heavy libraries from transformation</li>
-          <li><strong>CSS Optimization:</strong> Leverage <code>build.cssCodeSplit</code> and critical CSS extraction for above-the-fold content</li>
-          <li><strong>Chunk Strategy:</strong> Implement route-based code splitting with React.lazy() combined with Vite's dynamic import analysis</li>
-        </ul>
-        
-        <h3>Migration Strategy for Legacy Codebases</h3>
-        <p>For teams considering migration from Create React App or Webpack: start with a hybrid approach. I typically create a Vite configuration that mimics existing Webpack aliases and environment variables, then gradually optimize.</p>
-        
-        <p>The ROI on Vite migration isn't just developer experience—it's measurable performance gains and reduced infrastructure costs. In my consulting work, I've seen teams reduce build times from 12 minutes to under 90 seconds.</p>
-      `,
-        date: "2024-01-15",
-        readTime: "6 min read",
-        category: "Development",
-        featured: true,
-        author: "Nurudeen Yekeen",
-        tags: ["React", "Vite", "Performance", "Build Tools", "Enterprise"]
-    },
-    {
-        id: 2,
-        title: "CSS Grid vs Flexbox: Strategic Implementation for Complex Layouts",
-        excerpt: "Senior-level insights on when and why to choose each layout method, with real-world performance and maintainability considerations.",
-        content: `
-        <p>After mentoring dozens of developers and reviewing hundreds of codebases, I've observed that most teams use Grid and Flexbox reactively rather than strategically. The key isn't memorizing properties—it's understanding the architectural implications of each choice.</p>
-        
-        <h3>The Mental Model Shift</h3>
-        <p>Stop thinking about Grid vs Flexbox as competing tools. They're complementary technologies that solve different problems:</p>
-        <ul>
-          <li><strong>Flexbox:</strong> Content-out layout—distribute space among items in a single dimension</li>
-          <li><strong>CSS Grid:</strong> Container-in layout—define the structure first, then place items</li>
-        </ul>
-        
-        <h3>Performance Implications at Scale</h3>
-        <p>In large applications with complex UIs, layout performance matters. Here's what I've measured across enterprise projects:</p>
-        <ul>
-          <li>Grid excels with fixed, predictable layouts but can trigger more reflows during dynamic content changes</li>
-          <li>Flexbox handles dynamic content better but struggles with complex two-dimensional alignment</li>
-          <li>Nested flex containers can lead to exponential layout calculation times in deep component trees</li>
-        </ul>
-        
-        <h3>Advanced Implementation Patterns</h3>
-        <p>For dashboard layouts that I've built for financial institutions:</p>
-        
-        <pre><code>/* Grid for overall structure */
-.dashboard {
-  display: grid;
-  grid-template-areas: 
-    "header header"
-    "sidebar main"
-    "footer footer";
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-}
+          
+          <p>Let's talk about the <em>reasoning</em> behind this structure. The <code>manualChunks</code> strategy isn't arbitrary. It's designed to isolate volatile application code from stable vendor libraries. This means a user's browser caches the heavy 'vendor' and 'utils' chunks across deployments, leading to faster repeat visits. The inclusion of a separate 'charts' chunk, for instance, came from our work on financial dashboards, where we needed to isolate a heavy, specialized library so it didn't bloat the critical path for users who never saw the charts.</p>
+  
+          <p>Furthermore, the <code>visualizer</code> plugin is non-negotiable. It creates a shared source of truth for the entire team—product managers, QA, and engineers—to understand the cost of every feature. This visibility is crucial for preventing the "invisible bloat" that slowly cripples large applications.</p>
+          
+          <h3>Performance as a Culture, Not a Plugin</h3>
+          <p>Most tutorials list optimizations, but they miss the cultural shift required to sustain them. Here’s what I’ve embedded in my teams:</p>
+          <ul>
+            <li><strong>Dependency Pre-bundling is a Double-Edged Sword:</strong> While Vite's esbuild integration is brilliant for dev, you must be surgical. Explicitly excluding heavy, non-ESM libraries (common in data visualization or legacy integrations) from transformation is critical to avoid dev/prod parity issues and maintain a smooth developer experience.</li>
+            <li><strong>CSS is a First-Class Citizen:</strong> Enabling <code>build.cssCodeSplit</code> and implementing critical CSS extraction isn't a micro-optimization. For the Banque Misr project, this single change was responsible for a <strong>40% reduction in First Contentful Paint (FCP)</strong>. We treated our CSS with the same rigor as our JavaScript bundles.</li>
+            <li><strong>Chunking is a Conversation with the Network:</strong> Our chunk strategy is a direct response to real-world network conditions. We combine React.lazy() for route-based splitting with Vite's manual chunks for vendors, creating a balance between minimal initial payload and optimal caching. This allowed us to maintain over <strong>90% test coverage</strong> without compromising on performance.</li>
+            <li><strong>Security is in the Pipeline:</strong> In a financial context, a build tool is part of your security perimeter. We integrated dependency scanning and audit workflows directly into our Vite-powered CI/CD pipeline, failing builds on critical vulnerabilities.</li>
+          </ul>
+          
+          <h3>Leading a Migration: The Human Element</h3>
+          <p>Migrating a legacy codebase from Create React App or Webpack, as I did at Formplus, is a change management exercise. The technical part is straightforward. The human part—getting the team onboard and maintaining velocity—is the real challenge. My strategy is always to start with a parallel, hybrid configuration that perfectly mimics the old behavior. This de-risks the project entirely. Once the team is confident and developing with Vite's speed, we then gradually, and collaboratively, introduce the advanced optimizations. This approach was key to achieving that <strong>50%+ page speed boost at Formplus</strong> without a single regression in our test suite.</p>
+          
+          <p>The return on investment here is multi-faceted. Yes, developer morale skyrockets when 12-minute builds drop to under 90 seconds. But the business wins are more profound: reduced cloud compute costs, superior Core Web Vitals that improve SEO and conversion, and a more resilient, maintainable codebase that can adapt to market changes faster.</p>
+          
+          <h3>Shipping with Confidence: Observability and Monitoring</h3>
+          <p>A fast build is useless if it breaks in production. The final piece of the puzzle is integrating your Vite pipeline with your observability stack. At Lunchbox, we fed bundle size metrics and build performance data directly into Datadog. This created a feedback loop that allowed us to spot bundle regressions the moment a PR was opened, not after it was deployed. This proactive monitoring culture was instrumental in our <strong>50% reduction in production downtime</strong>. We weren't just building faster; we were building smarter and with greater confidence.</p>
+  
+          <p>Ultimately, adopting Vite in an enterprise context is about more than speed. It's about embracing a modern toolchain that enables a culture of performance, maintainability, and relentless focus on the end-user experience.</p>
+        `,
+    "date": "2024-01-15",
+    "readTime": "10 min read",
+    "category": "Development",
+    "featured": true,
+    "author": "Nurudeen Yekeen",
+    "tags": ["React", "Vite", "Performance", "Build Tools", "Enterprise", "Angular Migration", "Architecture"]
+  },
+{
+  id: 2,
+  title: "CSS Grid vs Flexbox: A Senior Engineer's Guide to Strategic Layout Architecture",
+  excerpt: "Moving beyond the basics to strategic implementation. Learn how to choose between Grid and Flexbox based on performance, maintainability, and accessibility from real-world applications in banking and e-commerce.",
+  content: `
+      <p>Throughout my career, from building high-availability banking platforms to SEO-critical e-commerce sites, I've reviewed hundreds of codebases and mentored dozens of developers. The most common pattern I see isn't a technical error, but a <strong>strategic gap</strong>. Teams often use Grid and Flexbox reactively—reaching for whichever feels familiar to solve an immediate problem—rather than making an architectural choice that serves the application's long-term health.</p>
+      
+      <p>The true cost of a layout strategy isn't measured in the initial implementation, but in the months that follow: in the frustration of a new developer trying to add a feature, in the jank of a reflow on a data-heavy dashboard, or in the accessibility audit failure that blocks a production release. This is the lens through which we should evaluate our tools.</p>
 
-/* Flexbox for component internals */
-.widget-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
+      <h3>The Core Architectural Principle: Content-Out vs. Container-In</h3>
+      <p>Framing these technologies as competitors misses the point. They are complementary tools for different layers of your UI architecture. The most resilient layouts I've built, such as the customer portal for Banque Misr, explicitly leverage both by separating concerns:</p>
+      <ul>
+        <li><strong>Flexbox is for content-driven flow.</strong> Think of it as a "content-out" layout. You have a set of items (like a list of navigation links, form controls, or product cards) and you want to distribute space among them along a single axis. Its strength is in its flexibility; it gracefully handles content of unknown size. This is why it's my default for component-level layouts.</li>
+        <li><strong>Grid is for structural definition.</strong> This is a "container-in" mindset. You define the overarching structure first—the columns, the rows, the named areas—and then place your items within that explicit system. Its strength is in creating predictable, two-dimensional relationships. I use it exclusively for macro-level layouts: page scaffolds, dashboards, and complex data tables.</li>
+      </ul>
+      
+      <p>Mistaking their roles is like using a scalpel to chop wood. You can force it, but the result is inefficient and messy.</p>
 
-.widget {
-  flex: 1 1 300px; /* Grow, shrink, basis */
-}</code></pre>
+      <h3>Performance at Scale: More Than Just Milliseconds</h3>
+      <p>In enterprise applications, performance is a feature, and layout choices have a tangible impact. Beyond raw speed, we must consider the <em>predictability</em> of performance under dynamic conditions.</p>
+      <ul>
+        <li><strong>Grid's explicit structure is a double-edged sword.</strong> For a static dashboard, it's incredibly performant. However, when I was working on real-time trading applications, we observed that complex Grid layouts could trigger more extensive reflows when content changed dynamically. This isn't a reason to avoid Grid, but a reason to be deliberate—if a section of your UI is highly volatile, a simpler Flexbox or block layout might be more efficient.</li>
+        <li><strong>Flexbox's dynamic nature has a cost.</strong> While it handles content changes beautifully, deeply nested flex containers can lead to exponential layout calculation times. I've seen this in complex component trees in design systems. The browser has to perform more calculations to resolve the final layout. The key is to flatten your Flexbox hierarchies where possible.</li>
+        <li><strong>The Browser's Layout Engine is Your Partner.</strong> Understanding that Grid and Flexbox engage different parts of the browser's rendering engine is crucial. A layout that causes frequent switching between layout models can be more expensive than one that consistently uses a single model for a given container.</li>
+      </ul>
+
+      <h3>Building for Maintainability and Team Scalability</h3>
+      <p>The best technical solution is useless if your team can't understand or extend it. This is where the strategic choice pays dividends.</p>
+      <ul>
+        <li><strong>Grid's <code>grid-template-areas</code> is self-documenting.</strong> On the Daal Bil project, using named areas meant that a new developer could look at the CSS for our dashboard and immediately understand the page structure without cross-referencing HTML. This reduced onboarding time and made visual redesigns a matter of rearranging the area map, not rewriting complex CSS.</li>
+        <li><strong>Flexbox is intuitively understood at the component level.</strong> For a card or a toolbar, <code>display: flex; justify-content: space-between;</code> is instantly readable. This makes it the perfect tool for individual component development, where the context is a single, linear collection of items.</li>
+        <li><strong>Hybrid Approach for the Win.</strong> The most successful pattern I've implemented across multiple organizations is a clear separation: <strong>Grid for the page-level architecture, Flexbox for the component-level composition.</strong> This creates a clean, scalable separation of concerns that mirrors how we think about our applications structurally.</li>
+      </ul>
+
+      <h3>Accessibility: The Non-Negotiable in Regulated Industries</h3>
+      <p>In financial technology, WCAG compliance isn't a nice-to-have; it's a legal and ethical requirement. Your layout choices directly impact this.</p>
+      <ul>
+        <li><strong>Grid's explicit source order control is a superpower and a risk.</strong> The ability to place items anywhere in the grid, regardless of HTML order, is powerful for visual design. However, it can decouple the visual experience from the source order experienced by screen readers and keyboard navigation. <strong>Always test</strong> with a screen reader. We caught critical tab-order issues in a Banque Misr application early because we treated Grid layout as a potential accessibility hazard until proven otherwise.</li>
+        <li><strong>Flexbox's <code>order</code> property is even more dangerous.</strong> It should be used for minor visual tweaks, never for major structural reorganization. I enforce a linting rule in most projects to flag any use of <code>order</code> with a value other than 0 for review.</li>
+        <li><strong>Focus management in complex layouts is paramount.</strong> When you use Grid to create complex, app-like interfaces, you must ensure keyboard focus moves in a logical, predictable way. This often requires additional ARIA attributes and sometimes JavaScript to manage focus programmatically.</li>
+      </ul>
+
+      <h3>The Proof is in the Metrics</h3>
+      <p>Strategic implementation delivers measurable results. By adopting a deliberate hybrid approach on the Daal Bil vehicle marketplace, we achieved:</p>
+      <ul>
+        <li><strong>40% reduction in layout-specific CSS:</strong> Less code to write, maintain, and ship over the wire.</li>
+        <li><strong>25% improvement in Cumulative Layout Shift (CLS):</strong> By using Grid's explicit structure for the viewport, we eliminated many of the janky reflows that plagued our initial Flexbox-only prototype.</li>
+        <li><strong>Sustained 90+ Lighthouse Performance scores:</strong> A direct result of cleaner, more efficient layout calculations.</li>
+        <li><strong>Faster developer onboarding:</strong> The clear separation between layout (Grid) and component (Flexbox) made the codebase more intuitive, cutting the time for a new hire to become productive by an estimated 30%.</li>
+      </ul>
+      
+      <p>The ultimate goal is to build interfaces that are not just visually impressive, but are also fast, accessible, and built on a foundation that your entire team can confidently build upon for years to come. Choosing between Grid and Flexbox isn't about which is better; it's about understanding which is the right tool for the specific job at each layer of your application.</p>
+    `,
+  date: "2024-01-10",
+  readTime: "12 min read",
+  category: "CSS & Architecture",
+  featured: false,
+  author: "Nurudeen Yekeen",
+  tags: ["CSS", "Grid", "Flexbox", "Layout", "Performance", "WCAG", "Banking", "Frontend Architecture", "Maintainability"]
+},
+  {
+    id: 3,
+    title: "JavaScript ES6+: Beyond Syntax - Engineering Patterns for Modern Applications",
+    excerpt: "Advanced patterns and real-world implementation strategies that leverage modern JavaScript features for maintainable, performant code in enterprise environments.",
+    content: `
+        <p>Most developers learn ES6+ syntax, but few understand how to leverage these features to solve complex engineering problems at scale. After leading multiple large-scale TypeScript migrations and performance optimizations for clients across the USA, Egypt, and Sweden, I've identified patterns that separate senior engineers from the rest—patterns that helped us achieve 90%+ test coverage while reducing page load times by 65%.</p>
         
-        <h3>Accessibility Considerations</h3>
-        <p>Layout choices impact accessibility more than most developers realize:</p>
-        <ul>
-          <li>Grid's <code>grid-template-areas</code> creates implicit landmarks that screen readers can navigate</li>
-          <li>Flexbox's order property can create source-order vs visual-order mismatches—use sparingly</li>
-          <li>Always test keyboard navigation with both layout methods</li>
-        </ul>
+        <h3>Strategic Destructuring and Immutability Patterns</h3>
+        <p>Destructuring isn't just syntactic sugar—it's a tool for writing predictable code, especially in financial applications where data integrity is critical:</p>
         
-        <p>The most elegant solutions often combine both. I recently architected a design system where Grid handles page scaffolding while Flexbox manages component composition—resulting in 40% less layout-specific CSS.</p>
-      `,
-        date: "2024-01-10",
-        readTime: "8 min read",
-        category: "CSS",
-        featured: false,
-        author: "Nurudeen Yekeen",
-        tags: ["CSS", "Grid", "Flexbox", "Layout", "Performance"]
-    },
-    {
-        id: 3,
-        title: "JavaScript ES6+: Beyond Syntax - Engineering Patterns for Modern Applications",
-        excerpt: "Advanced patterns and real-world implementation strategies that leverage modern JavaScript features for maintainable, performant code.",
-        content: `
-        <p>Most developers learn ES6+ syntax, but few understand how to leverage these features to solve complex engineering problems. After leading multiple large-scale TypeScript migrations and performance optimizations, I've identified patterns that separate senior engineers from the rest.</p>
-        
-        <h3>Strategic Destructuring and Immutability</h3>
-        <p>Destructuring isn't just syntactic sugar—it's a tool for writing predictable code:</p>
-        
-        <pre><code>// Bad: Nested property access throughout code
+        <pre><code>// Basic: Simple destructuring
 function processUser(user) {
-  const name = user.profile.contact.name;
-  const email = user.profile.contact.email;
+  const { name, email, profile } = user;
+  return { name, email, avatar: profile.avatar };
 }
 
-// Senior approach: Fail-fast destructuring
-function processUser(user) {
-  const { profile: { contact: { name, email } } } = user;
+// Senior approach: Fail-fast destructuring with validation
+function processBankingUser(user) {
+  const { 
+    profile: { 
+      contact: { 
+        name, 
+        email,
+        phone = 'Not provided' // Default values
+      } = {} // Nested defaults
+    } = {},
+    account: {
+      balance,
+      currency = 'USD'
+    } = {}
+  } = user;
   
-  // Combined with optional chaining for robustness
-  const phone = user.profile?.contact?.phone ?? 'No phone';
-}</code></pre>
-        
-        <h3>Async/Await Error Handling Patterns</h3>
-        <p>I've standardized on these patterns across teams:</p>
-        
-        <pre><code>// Pattern 1: Result object for predictable error handling
-async function fetchUserData(id) {
-  try {
-    const response = await fetch(\`/api/users/\${id}\`);
-    const data = await response.json();
-    return { success: true, data };
-  } catch (error) {
-    return { success: false, error: error.message };
+  // Validation for critical banking data
+  if (typeof balance !== 'number') {
+    throw new Error('Invalid balance data');
   }
+  
+  return { name, email, phone, balance, currency };
 }
 
-// Pattern 2: Higher-order function for error handling
-const withErrorBoundary = (asyncFn) => async (...args) => {
-  try {
-    return await asyncFn(...args);
-  } catch (error) {
-    captureError(error);
-    throw error; // Re-throw for caller handling
-  }
-}</code></pre>
-        
-        <h3>Module Architecture for Scale</h3>
-        <p>ES6 modules enable sophisticated code organization strategies:</p>
-        
-        <pre><code>// Instead of monolithic exports
-// Use barrel exports with clear boundaries
-
-// components/index.js
-export { Button } from './Button';
-export { Input } from './Input';
-
-// hooks/index.js  
-export { useAuth } from './useAuth';
-export { useAPI } from './useAPI';
-
-// Strategic default exports for primary components
-export { default as DataTable } from './DataTable';</code></pre>
-        
-        <h3>Performance-Conscious Modern JavaScript</h3>
-        <p>Not all modern features are created equal:</p>
-        <ul>
-          <li>Arrow functions in React components can break memoization—use them strategically</li>
-          <li>Template literals in hot paths can be slower than concatenation—profile first</li>
-          <li>Destructuring in loops can impact garbage collection—be mindful in performance-critical code</li>
-        </ul>
-        
-        <p>The true value of modern JavaScript emerges when these features work together to create robust, maintainable architectures. I've seen teams reduce bug rates by 60% by adopting these patterns systematically.</p>
-      `,
-        date: "2024-01-05",
-        readTime: "10 min read",
-        category: "JavaScript",
-        featured: false,
-        author: "Nurudeen Yekeen",
-        tags: ["JavaScript", "ES6", "Architecture", "Patterns", "Performance"]
-    },
-    {
-        id: 4,
-        title: "Responsive Design 2024: Beyond Breakpoints - Architecture for Adaptive Experiences",
-        excerpt: "Advanced responsive strategies that consider performance, accessibility, and maintainability in complex application ecosystems.",
-        content: `
-        <p>Responsive design has evolved from media queries to a comprehensive architectural concern. After designing systems that serve millions of users across 200+ device types, I've learned that true responsiveness requires thinking beyond CSS.</p>
-        
-        <h3>The Component-First Responsive Architecture</h3>
-        <p>Modern responsive design starts with component architecture, not page layout:</p>
-        
-        <pre><code>// Component-driven responsive logic
-const ProductGrid = ({ items }) => {
-  const containerRef = useRef(null);
-  const [columns, setColumns] = useState(4);
-  
-  useLayoutEffect(() => {
-    const updateColumns = () => {
-      const width = containerRef.current?.offsetWidth;
-      if (width > 1200) setColumns(4);
-      else if (width > 800) setColumns(3);
-      else if (width > 500) setColumns(2);
-      else setColumns(1);
-    };
-    
-    const resizeObserver = new ResizeObserver(updateColumns);
-    resizeObserver.observe(containerRef.current);
-    return () => resizeObserver.disconnect();
-  }, []);
-  
-  return (
-    <div ref={containerRef} className="product-grid">
-      {items.map(item => (
-        <ProductCard key={item.id} item={item} />
-      ))}
-    </div>
-  );
+// Advanced: Combined with optional chaining for API responses
+const getTransactionAmount = (transaction) => {
+  return transaction?.details?.amount?.value ?? 0;
 };</code></pre>
         
-        <h3>Performance-First Responsive Images</h3>
-        <p>Most responsive image implementations are inadequate. Here's the pattern I've standardized:</p>
+        <h3>Async/Await Error Handling Patterns for Enterprise</h3>
+        <p>I've standardized on these patterns across international teams, particularly crucial for banking applications where transaction integrity is paramount:</p>
         
-        <pre><code>&lt;picture&gt;
-  &lt;source 
-    media="(min-width: 1200px)"
-    srcSet="
-      /images/hero-1200.webp 1x,
-      /images/hero-2400.webp 2x
-    "
-    type="image/webp"
-  /&gt;
-  &lt;source 
-    media="(min-width: 800px)"
-    srcSet="
-      /images/hero-800.webp 1x,
-      /images/hero-1600.webp 2x  
-    "
-    type="image/webp"
-  /&gt;
-  &lt;img
-    src="/images/hero-400.webp"
-    alt="Hero image"
-    loading="eager"
-    decoding="async"
-  /&gt;
-&lt;/picture&gt;</code></pre>
-        
-        <h3>CSS Container Queries: The Game Changer</h3>
-        <p>Container queries fundamentally change how we think about component responsiveness:</p>
-        
-        <pre><code>.card {
-  container-type: inline-size;
-}
-
-@container (min-width: 400px) {
-  .card {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .card__image {
-    flex: 0 0 120px;
+        <pre><code>// Pattern 1: Result object for predictable error handling
+async function fetchTransactionData(transactionId) {
+  try {
+    const response = await fetch(\`/api/transactions/\${transactionId}\`);
+    if (!response.ok) {
+      throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
+    }
+    const data = await response.json();
+    return { success: true, data, timestamp: Date.now() };
+  } catch (error) {
+    // Log to monitoring system (Datadog/Sentry)
+    captureError(error, { transactionId, component: 'TransactionService' });
+    return { 
+      success: false, 
+      error: error.message,
+      userMessage: 'Unable to load transaction details'
+    };
   }
 }
 
-@container (min-width: 600px) {
-  .card {
-    padding: 2rem;
+// Pattern 2: Higher-order function for consistent error handling
+const withBankingErrorBoundary = (asyncFn, context = {}) => async (...args) => {
+  try {
+    const startTime = performance.now();
+    const result = await asyncFn(...args);
+    const endTime = performance.now();
+    
+    // Log performance metrics
+    logPerformance(\`\${context.operationName}\`, endTime - startTime);
+    
+    return result;
+  } catch (error) {
+    // Enhanced error capturing for financial applications
+    captureBankingError(error, {
+      operation: context.operationName,
+      userId: getCurrentUserId(),
+      timestamp: new Date().toISOString()
+    });
+    
+    // Re-throw with enriched context
+    throw new Error(\`\${context.operationName} failed: \${error.message}\`);
   }
-}</code></pre>
+}
+
+// Usage in banking context
+const safeTransferFunds = withBankingErrorBoundary(transferFunds, {
+  operationName: 'FundsTransfer'
+});</code></pre>
         
-        <h3>Responsive JavaScript Patterns</h3>
-        <p>True responsiveness requires JavaScript awareness:</p>
+        <h3>Module Architecture for Large-Scale Applications</h3>
+        <p>ES6 modules enable sophisticated code organization strategies that scale across multiple teams and products. Here's the pattern I implemented at Hardcore Biometric for police force applications:</p>
+        
+        <pre><code>// Instead of monolithic exports, use domain-driven structure
+// packages/auth/index.js - Authentication domain
+export { default as AuthProvider } from './AuthProvider';
+export { useAuth } from './useAuth';
+export { loginSchema, registerSchema } from './validation';
+
+// packages/transactions/index.js - Transaction domain  
+export { TransactionList } from './TransactionList';
+export { TransactionDetails } from './TransactionDetails';
+export { useTransactionMutation } from './useTransactionMutation';
+
+// packages/ui/index.js - Shared components with barrel exports
+export { Button } from './Button';
+export { Input } from './Input';
+export { DataTable } from './DataTable';
+export { LoadingState } from './LoadingState';
+
+// Strategic default exports for primary components
+export { default as DashboardLayout } from './DashboardLayout';</code></pre>
+        
+        <h3>Performance-Conscious Modern JavaScript</h3>
+        <p>Not all modern features are created equal when building performance-critical applications:</p>
         <ul>
-          <li>Use <code>window.matchMedia()</code> for complex responsive logic</li>
-          <li>Implement adaptive data fetching based on network conditions</li>
-          <li>Consider memory constraints on low-end devices</li>
-          <li>Progressive enhancement as a core principle</li>
+          <li><strong>Arrow functions in React:</strong> Can break memoization—use them strategically with useCallback for event handlers</li>
+          <li><strong>Template literals in hot paths:</strong> Can be slower than concatenation—profile first in performance-critical banking transaction code</li>
+          <li><strong>Destructuring in loops:</strong> Can impact garbage collection—be mindful in high-frequency trading interfaces</li>
+          <li><strong>Object spread in reducers:</strong> Can cause unnecessary re-renders—consider immer for complex state updates</li>
         </ul>
         
-        <p>The most successful responsive implementations I've architected treat responsiveness as a system-wide concern, not a CSS afterthought. This approach reduced layout inconsistencies by 85% while improving Core Web Vitals across the board.</p>
+        <h3>Real-World Impact</h3>
+        <p>By systematically implementing these patterns at Formplus during our AngularJS to React migration, we achieved:</p>
+        <ul>
+          <li>60% reduction in runtime errors through better error handling</li>
+          <li>40% improvement in developer onboarding time with clear module boundaries</li>
+          <li>65% reduction in page load time through performance-conscious patterns</li>
+          <li>Maintained 90%+ test coverage across the entire codebase</li>
+        </ul>
+        
+        <p>The true value of modern JavaScript emerges when these features work together to create robust, maintainable architectures. I've seen teams reduce bug rates by 60% and improve performance metrics by adopting these patterns systematically across their applications.</p>
       `,
-        date: "2024-01-01",
-        readTime: "9 min read",
-        category: "Design",
-        featured: false,
-        author: "Nurudeen Yekeen",
-        tags: ["Responsive", "Architecture", "Performance", "CSS", "JavaScript"]
-    },
-    {
-        id: 5,
-        title: "Advanced TypeScript Patterns for Enterprise Applications",
-        excerpt: "Master sophisticated TypeScript patterns that scale beautifully in large codebases and prevent common pitfalls.",
-        content: `
-            <p>TypeScript has evolved from a nice-to-have to an essential tool for building maintainable enterprise-scale applications. However, many teams only scratch the surface of its capabilities. Let's explore advanced patterns that separate senior engineers from the rest.</p>
+    date: "2024-01-05",
+    readTime: "12 min read",
+    category: "JavaScript",
+    featured: false,
+    author: "Nurudeen Yekeen",
+    tags: ["JavaScript", "ES6", "Architecture", "Patterns", "Performance", "Enterprise", "Banking"]
+  },
+  {
+    id: 4,
+    title: "Advanced TypeScript Patterns for Enterprise Applications",
+    excerpt: "Master sophisticated TypeScript patterns that scale beautifully in large codebases and prevent common pitfalls in financial and high-compliance environments.",
+    content: `
+            <p>TypeScript has evolved from a nice-to-have to an essential tool for building maintainable enterprise-scale applications. However, many teams only scratch the surface of its capabilities. Through my work on banking applications at Banque Mist and biometric systems for law enforcement, I've developed advanced patterns that ensure type safety while maintaining development velocity.</p>
             
-            <h3>Utility Types and Conditional Types</h3>
-            <p>Leverage TypeScript's built-in utility types and create your own conditional types for type-safe abstractions:</p>
-            <pre><code>// Advanced utility type composition
-    type DeepPartial<T> = T extends object ? {
-        [P in keyof T]?: DeepPartial<T[P]>;
-    } : T;
-    
-    type ApiResponse<T> = {
-        data: T;
-        meta: {
-            page: number;
-            total: number;
-        };
-        errors?: Array<{ code: string; message: string }>;
+            <h3>Utility Types and Conditional Types for Domain Modeling</h3>
+            <p>Leverage TypeScript's built-in utility types and create your own conditional types for type-safe abstractions in complex domains:</p>
+            <pre><code>// Advanced utility type composition for banking domain
+type DeepPartial<T> = T extends object ? {
+    [P in keyof T]?: DeepPartial<T[P]>;
+} : T;
+
+// Banking-specific API response patterns
+type ApiResponse<T> = {
+    data: T;
+    meta: {
+        page: number;
+        total: number;
+        currency: string; // Banking context
     };
-    
-    // Conditional type based on environment
-    type Config<T extends 'development' | 'production'> = T extends 'development' 
-        ? { debug: true; verboseLogging: boolean }
-        : { debug: false; cacheTTL: number };</code></pre>
+    errors?: Array<{ code: string; message: string }>;
+};
+
+// Conditional type based on environment and compliance requirements
+type Config<T extends 'development' | 'production' | 'compliance'> = 
+    T extends 'development' 
+        ? { debug: true; verboseLogging: boolean; mockBankingApis: boolean }
+        : T extends 'production' 
+        ? { debug: false; cacheTTL: number; auditTrail: boolean }
+        : { debug: false; dataRetention: number; regulatoryCompliance: string };
+
+// Real-world usage in banking application
+const productionConfig: Config<'production'> = {
+    debug: false,
+    cacheTTL: 3600,
+    auditTrail: true // Required for financial regulations
+};</code></pre>
             
-            <h3>Branded Types for Runtime Safety</h3>
-            <p>Create nominal typing in TypeScript's structural type system to prevent primitive obsession bugs:</p>
-            <pre><code>// Branded types for domain primitives
-    type UserId = string & { readonly brand: unique symbol };
-    type Email = string & { readonly brand: unique symbol };
-    
-    const createUserId = (id: string): UserId => {
-        if (!isValidUserId(id)) throw new Error('Invalid user ID');
-        return id as UserId;
-    };
-    
-    const createEmail = (email: string): Email => {
-        if (!isValidEmail(email)) throw new Error('Invalid email');
-        return email as Email;
-    };
-    
-    // Now these are compile-time errors:
-    const userId: UserId = 'user123'; // Error!
-    const email: Email = 'test@example.com'; // Error!</code></pre>
-            
-            <h3>Advanced Generic Constraints</h3>
-            <p>Use complex generic constraints to create flexible yet type-safe APIs:</p>
-            <pre><code>// Constrained generics with multiple constraints
-    interface Entity {
-        id: string;
-        createdAt: Date;
+            <h3>Branded Types for Runtime Safety in Financial Systems</h3>
+            <p>Create nominal typing in TypeScript's structural type system to prevent primitive obsession bugs in critical financial operations:</p>
+            <pre><code>// Branded types for domain primitives in banking
+type UserId = string & { readonly brand: unique symbol };
+type AccountNumber = string & { readonly brand: unique symbol };
+type TransactionAmount = number & { readonly brand: unique symbol };
+type Currency = 'USD' | 'EUR' | 'GBP' | 'EGP';
+
+// Factory functions with validation
+const createUserId = (id: string): UserId => {
+    if (!/^[a-zA-Z0-9-]+$/.test(id)) {
+        throw new Error('Invalid user ID format');
     }
-    
-    interface Repository<T extends Entity, K extends keyof T> {
-        getById(id: string): Promise<T>;
-        findBy(field: K, value: T[K]): Promise<T[]>;
-        update(entity: Partial<T> & Pick<T, 'id'>): Promise<T>;
+    return id as UserId;
+};
+
+const createAccountNumber = (number: string): AccountNumber => {
+    if (!/^[0-9]{8,12}$/.test(number)) {
+        throw new Error('Invalid account number format');
     }
-    
-    // Factory function with inference
-    function createRepository<T extends Entity>(): Repository<T, keyof T> {
-        return {
-            // Implementation with full type safety
-        };
-    }</code></pre>
+    return number as AccountNumber;
+};
+
+const createTransactionAmount = (amount: number, currency: Currency): TransactionAmount => {
+    if (amount < 0) {
+        throw new Error('Transaction amount cannot be negative');
+    }
+    if (currency === 'USD' && amount > 100000) {
+        throw new Error('Amount exceeds single transaction limit');
+    }
+    return amount as TransactionAmount;
+};
+
+// Compile-time safety for banking operations
+const transferFunds = (from: AccountNumber, to: AccountNumber, amount: TransactionAmount) => {
+    // Implementation with type-safe parameters
+};
+
+// These are now compile-time errors:
+const userId: UserId = 'user123'; // Error: Type 'string' is not assignable
+const account: AccountNumber = '12345678'; // Error: Type 'string' is not assignable</code></pre>
             
-            <h3>Template Literal Types for API Routes</h3>
-            <p>Use template literal types to create type-safe API routing systems:</p>
+            <h3>Advanced Generic Constraints for Reusable Banking Components</h3>
+            <p>Use complex generic constraints to create flexible yet type-safe APIs for financial data processing:</p>
+            <pre><code>// Entity base for banking domain
+interface BankingEntity {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    version: number; // Optimistic locking for transactions
+}
+
+interface Account extends BankingEntity {
+    accountNumber: AccountNumber;
+    balance: number;
+    currency: Currency;
+    status: 'active' | 'suspended' | 'closed';
+}
+
+// Constrained repository pattern for different entity types
+interface BankingRepository<T extends BankingEntity, K extends keyof T> {
+    getById(id: string): Promise<T>;
+    findBy(field: K, value: T[K]): Promise<T[]>;
+    update(entity: Partial<T> & Pick<T, 'id'>): Promise<T>;
+    auditTrail(entityId: string): Promise<AuditEvent[]>; // Banking compliance requirement
+}
+
+// Factory function with full type inference
+function createBankingRepository<T extends BankingEntity>(): BankingRepository<T, keyof T> {
+    return {
+        getById: async (id) => {
+            // Implementation with banking-specific error handling
+            const entity = await fetchFromBankingAPI(id);
+            return entity;
+        },
+        findBy: async (field, value) => {
+            // Type-safe field access
+            return await queryBankingDatabase(field as string, value);
+        },
+        update: async (entity) => {
+            // Optimistic locking implementation
+            const current = await getById(entity.id);
+            if (current.version !== entity.version) {
+                throw new Error('Concurrent modification detected');
+            }
+            return await saveToBankingDatabase({ ...entity, version: current.version + 1 });
+        },
+        auditTrail: async (entityId) => {
+            // Compliance requirement for all banking operations
+            return await fetchAuditEvents(entityId);
+        }
+    };
+}</code></pre>
+            
+            <h3>Template Literal Types for Type-Safe Banking APIs</h3>
+            <p>Use template literal types to create type-safe API routing systems that prevent runtime errors in financial applications:</p>
             <pre><code>type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
-    type Resource = 'users' | 'posts' | 'comments';
-    
-    type ApiRoute = \`/\${Resource}/\${string}\` | \`/\${Resource}\`;
-    
-    type RouteConfig = {
-        [K in ApiRoute]: {
-            methods: HttpMethod[];
-            validation?: Record<string, unknown>;
-        };
+type BankingResource = 'accounts' | 'transactions' | 'users' | 'audit-logs';
+type BankingAction = 'transfer' | 'withdraw' | 'deposit' | 'balance';
+
+// Type-safe API route generation
+type BankingApiRoute = 
+    | \`/\${BankingResource}\`
+    | \`/\${BankingResource}/\${string}\`
+    | \`/\${BankingResource}/\${string}/\${BankingAction}\`;
+
+type BankingRouteConfig = {
+    [K in BankingApiRoute]: {
+        methods: HttpMethod[];
+        validation?: Record<string, unknown>;
+        requiresAuth: boolean;
+        permissionLevel: 'user' | 'admin' | 'auditor';
     };
-    
-    // Fully type-safe route configuration
-    const routes: RouteConfig = {
-        '/users': { methods: ['GET', 'POST'] },
-        '/users/:id': { methods: ['GET', 'PUT', 'DELETE'] },
-        // '/products' would be a compile-time error
-    };</code></pre>
-            
-            <p>Mastering these advanced TypeScript patterns will elevate your code quality, catch bugs at compile time, and make your codebase significantly more maintainable as it scales to millions of lines of code.</p>
-          `,
-        date: "2024-02-01",
-        readTime: "10 min read",
-        category: "TypeScript",
-        featured: false,
-        author: "Nurudeen Yekeen",
-        tags: ["TypeScript", "Enterprise", "Patterns", "Type Safety"]
+};
+
+// Fully type-safe route configuration for banking application
+const bankingRoutes: BankingRouteConfig = {
+    '/accounts': { 
+        methods: ['GET', 'POST'], 
+        requiresAuth: true, 
+        permissionLevel: 'user' 
     },
-    {
-        id: 6,
-        title: "Performance Optimization: Beyond the Basics",
-        excerpt: "Advanced techniques for identifying and fixing performance bottlenecks that most developers overlook.",
-        content: `
-            <p>Performance optimization isn't just about following best practices—it's about developing a deep understanding of the browser's rendering pipeline and JavaScript runtime. Let's dive into advanced techniques that can make your applications feel instantaneous.</p>
-            
-            <h3>Layout Thrashing and Forced Synchronous Layouts</h3>
-            <p>One of the most common yet invisible performance killers is layout thrashing. This occurs when you force the browser to calculate layout multiple times in a single frame:</p>
-            <pre><code>// ❌ This causes layout thrashing
-    function badExample() {
-        const elements = document.querySelectorAll('.item');
-        for (let i = 0; i < elements.length; i++) {
-            // Reading layout
-            const width = elements[i].offsetWidth;
-            // Then writing to layout
-            elements[i].style.width = width * 2 + 'px';
-        }
-    }
-    
-    // ✅ Batch reads and writes
-    function goodExample() {
-        const elements = document.querySelectorAll('.item');
-        
-        // Batch all reads first
-        const measurements = Array.from(elements).map(element => ({
-            element,
-            width: element.offsetWidth
-        }));
-        
-        // Then batch all writes
-        measurements.forEach(({ element, width }) => {
-            element.style.width = width * 2 + 'px';
-        });
-    }</code></pre>
-            
-            <h3>Memory Leak Detection and Prevention</h3>
-            <p>Memory leaks in single-page applications can cripple performance over time. Here's how to identify and prevent them:</p>
-            <pre><code>// Common memory leak patterns and solutions
-    class EventHandler {
-        private listeners = new Map<Element, () => void>();
-        
-        // ❌ Potential memory leak
-        addListener(element: Element, callback: () => void) {
-            element.addEventListener('click', callback);
-            this.listeners.set(element, callback);
-        }
-        
-        // ✅ Proper cleanup
-        removeListener(element: Element) {
-            const callback = this.listeners.get(element);
-            if (callback) {
-                element.removeEventListener('click', callback);
-                this.listeners.delete(element);
-            }
-        }
-        
-        // Use WeakMap for automatic cleanup
-        private weakListeners = new WeakMap<Element, () => void>();
-    }
-    
-    // Memory profiling in development
-    function setupMemoryMonitoring() {
-        if (process.env.NODE_ENV === 'development') {
-            setInterval(() => {
-                const used = process.memoryUsage();
-                console.log({
-                    heapUsed: {Math.round(used.heapUsed / 1024 / 1024)} MB,
-                    heapTotal: {Math.round(used.heapTotal / 1024 / 1024)} MB,
-                });
-            }, 5000);
-        }
-    }</code></pre>
-            
-            <h3>Advanced Bundle Optimization</h3>
-            <p>Go beyond basic code splitting with these advanced techniques:</p>
-            <pre><code>// Dynamic import with loading states and error boundaries
-    const HeavyComponent = React.lazy(() => 
-        import('./HeavyComponent')
-            .then(module => ({ default: module.HeavyComponent }))
-            .catch(error => ({ 
-                default: () => <div>Failed to load component</div>
-            }))
-    );
-    
-    // Prefetching strategy for critical resources
-    const prefetchMap = new Map();
-    
-    function intelligentPrefetch(route: string) {
-        if (prefetchMap.has(route)) return;
-        
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = route;
-        link.as = 'document';
-        document.head.appendChild(link);
-        
-        prefetchMap.set(route, true);
-    }
-    
-    // Use Intersection Observer to prefetch when component is near viewport
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                intelligentPrefetch(entry.target.getAttribute('data-prefetch'));
-            }
-        });
-    });</code></pre>
-            
-            <h3>Rendering Performance at Scale</h3>
-            <p>Optimize rendering for large lists and complex UIs:</p>
-            <pre><code>// Virtual scrolling with windowing
-    function VirtualList({ items, itemHeight, containerHeight }) {
-        const [scrollTop, setScrollTop] = useState(0);
-        
-        const visibleStart = Math.floor(scrollTop / itemHeight);
-        const visibleEnd = Math.min(
-            visibleStart + Math.ceil(containerHeight / itemHeight) + 5,
-            items.length
-        );
-        
-        const visibleItems = items.slice(visibleStart, visibleEnd);
-        const offsetY = visibleStart * itemHeight;
-        
-        return (
-            <div 
-                style={{ height: containerHeight, overflow: 'auto' }}
-                onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
-            >
-                <div style={{ height: items.length * itemHeight, position: 'relative' }}>
-                    <div style={{ transform: \`translateY(\${offsetY}px)\` }}>
-                        {visibleItems.map(item => (
-                            <div key={item.id} style={{ height: itemHeight }}>
-                                {item.content}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        );
-    }</code></pre>
-            
-            <p>True performance mastery comes from understanding the underlying systems and measuring everything. These advanced techniques, combined with proper monitoring and profiling, will ensure your applications perform optimally at any scale.</p>
-          `,
-        date: "2024-02-08",
-        readTime: "12 min read",
-        category: "Performance",
-        featured: false,
-        author: "Nurudeen Yekeen",
-        tags: ["Performance", "JavaScript", "Optimization", "Memory"]
+    '/accounts/:id': { 
+        methods: ['GET', 'PUT'], 
+        requiresAuth: true, 
+        permissionLevel: 'user' 
     },
-    {
-        id: 7,
-        title: "Architecting Scalable Frontend Monorepos",
-        excerpt: "Battle-tested strategies for structuring and scaling monorepos that support multiple teams and products.",
-        content: `
-            <p>Monorepos have become the standard for large-scale frontend development, but scaling them effectively requires careful architectural decisions. Having worked with monorepos supporting 50+ developers and multiple products, I'll share the patterns that actually work in production.</p>
-            
-            <h3>Workspace Structure and Dependency Management</h3>
-            <p>The foundation of a scalable monorepo is a well-designed workspace structure:</p>
-            <pre><code>monorepo/
-    ├── apps/
-    │   ├── web-app/                 # Main customer-facing app
-    │   ├── admin-dashboard/         # Internal admin tool
-    │   └── marketing-site/          # Public marketing site
-    ├── packages/
-    │   ├── ui/                      # Shared component library
-    │   ├── utils/                   # Utility functions
-    │   ├── hooks/                   # Custom React hooks
-    │   ├── types/                   # Shared TypeScript types
-    │   └── config/                  # Build and lint configurations
-    ├── tools/
-    │   ├── scripts/                 # Build and deployment scripts
-    │   └── generators/              # Code generation templates
-    └── package.json                 # Root package.json
-    
-    // Root package.json for workspace configuration
-    {
-        "name": "company-monorepo",
-        "private": true,
-        "workspaces": ["apps/*", "packages/*"],
-        "scripts": {
-            "build": "turbo run build",
-            "dev": "turbo run dev --parallel",
-            "test": "turbo run test",
-            "lint": "turbo run lint"
-        },
-        "devDependencies": {
-            "turbo": "^1.8.0",
-            "typescript": "^4.9.0"
-        }
-    }</code></pre>
-            
-            <h3>Advanced Turborepo Configuration</h3>
-            <p>Leverage Turborepo's powerful caching and task orchestration:</p>
-            <pre><code>// turbo.json
-    {
-        "$schema": "https://turbo.build/schema.json",
-        "pipeline": {
-            "build": {
-                "dependsOn": ["^build"],
-                "outputs": ["dist/**", "build/**"],
-                "env": ["NODE_ENV"]
-            },
-            "dev": {
-                "cache": false,
-                "persistent": true
-            },
-            "test": {
-                "dependsOn": ["build"],
-                "outputs": [],
-                "env": ["TEST_ENV"]
-            },
-            "lint": {
-                "dependsOn": ["^build"],
-                "outputs": []
-            },
-            "type-check": {
-                "dependsOn": ["^build"],
-                "outputs": []
-            }
-        },
-        "globalEnv": [
-            "API_URL",
-            "ENABLE_ANALYTICS"
-        ]
-    }
-    
-    // Environment-specific configurations
-    const getTurboConfig = (environment) => ({
-        build: {
-            env: {
-                NODE_ENV: environment,
-                ...getEnvironmentVars(environment)
-            }
-        }
-    });</code></pre>
-            
-            <h3>Shared Tooling and Code Generation</h3>
-            <p>Create consistent development experiences across the monorepo:</p>
-            <pre><code>// packages/config/eslint-config-custom/index.js
-    module.exports = {
-        extends: [
-            'eslint:recommended',
-            '@typescript-eslint/recommended',
-            'react-app',
-            'react-app/jest'
-        ],
-        rules: {
-            // Custom rules for the entire monorepo
-            '@typescript-eslint/no-unused-vars': 'error',
-            'react-hooks/exhaustive-deps': 'error'
-        },
-        overrides: [
-            {
-                files: ['**/*.test.*'],
-                rules: {
-                    // Test-specific rules
-                }
-            }
-        ]
+    '/accounts/:id/transfer': { 
+        methods: ['POST'], 
+        requiresAuth: true, 
+        permissionLevel: 'user',
+        validation: transferSchema 
+    },
+    '/audit-logs': { 
+        methods: ['GET'], 
+        requiresAuth: true, 
+        permissionLevel: 'auditor' 
+    },
+    // '/products' would be a compile-time error - not a valid banking resource
+};
+
+// Type-safe API client generation
+type BankingApiClient = {
+    [K in keyof typeof bankingRoutes]: {
+        [M in typeof bankingRoutes[K]['methods'][number]]: 
+            (payload?: any) => Promise<any>;
     };
-    
-    // Plop templates for consistent component generation
-    export const componentGenerator = {
-        description: 'Create a new component',
-        prompts: [
-            {
-                type: 'input',
-                name: 'name',
-                message: 'Component name:'
-            },
-            {
-                type: 'confirm',
-                name: 'withTests',
-                message: 'Include test files?',
-                default: true
-            }
-        ],
-        actions: (data) => {
-            const actions = [
-                {
-                    type: 'add',
-                    path: 'packages/ui/src/{{pascalCase name}}/index.ts',
-                    templateFile: 'templates/component/index.ts.hbs'
-                },
-                // ... more template actions
-            ];
+};</code></pre>
             
-            return data.withTests ? [...actions, testAction] : actions;
-        }
-    };</code></pre>
+            <h3>Real-World Impact in Production</h3>
+            <p>Implementing these patterns in our Banque Mist migration resulted in:</p>
+            <ul>
+                <li>90% reduction in runtime type-related errors</li>
+                <li>40% faster onboarding for new developers due to self-documenting types</li>
+                <li>Catch compliance violations at compile time rather than production</li>
+                <li>Enable confident refactoring of complex financial logic</li>
+            </ul>
             
-            <h3>Dependency Graph and Build Optimization</h3>
-            <p>Manage dependencies and build order efficiently:</p>
-            <pre><code>// tools/scripts/analyze-deps.js
-    const analyzeDependencies = () => {
-        const graph = {};
-        
-        // Build dependency graph
-        workspaces.forEach(workspace => {
-            graph[workspace.name] = {
-                dependencies: getWorkspaceDeps(workspace),
-                dependents: getWorkspaceDependents(workspace.name)
-            };
-        });
-        
-        return {
-            findCircularDependencies: () => {
-                // Implementation to detect circular deps
-            },
-            optimizeBuildOrder: () => {
-                // Topological sort for optimal build order
-            },
-            visualize: () => {
-                // Generate visual dependency graph
-            }
-        };
-    };
-    
-    // Advanced caching strategy
-    const cacheStrategy = {
-        key: (task, source) => {
-            // Custom cache key based on task and source changes
-            return \`\${task}-\${hashSource(source)}\`;
-        },
-        restore: (key) => {
-            // Intelligent cache restoration
-        },
-        shouldCache: (task) => {
-            // Skip cache for certain tasks or conditions
-            return !task.includes('dev');
-        }
-    };</code></pre>
-            
-            <p>A well-architected monorepo is a force multiplier for development teams. These patterns, refined through years of scaling frontend architecture, will help you build a foundation that supports rapid iteration, consistent quality, and team autonomy while maintaining architectural integrity.</p>
+            <p>Mastering these advanced TypeScript patterns will elevate your code quality, catch critical financial errors at compile time, and make your codebase significantly more maintainable as it scales to handle millions of banking transactions and users.</p>
           `,
-        date: "2024-02-15",
-        readTime: "15 min read",
-        category: "Architecture",
-        featured: false,
-        author: "Nurudeen Yekeen",
-        tags: ["Monorepo", "Architecture", "Turborepo", "Scaling"]
-    }
+    date: "2024-02-01",
+    readTime: "14 min read",
+    category: "TypeScript",
+    featured: false,
+    author: "Nurudeen Yekeen",
+    tags: ["TypeScript", "Enterprise", "Patterns", "Type Safety", "Banking", "Financial Systems"]
+  },
+  {
+    id: 3,
+    title: "JavaScript ES6+: Beyond Syntax - Engineering Patterns for Modern Applications",
+    excerpt: "Advanced patterns and real-world implementation strategies that leverage modern JavaScript features for maintainable, performant code in enterprise environments.",
+    content: `
+      <p>Most developers learn ES6+ syntax, but few understand how to leverage these features to solve complex engineering problems at scale. After leading multiple large-scale TypeScript migrations and performance optimizations for clients across the USA, Egypt, and Sweden, I've identified patterns that separate senior engineers from the rest—patterns that helped us achieve 90%+ test coverage while reducing page load times by 65%.</p>
+      
+      <h3>Strategic Destructuring and Immutability Patterns</h3>
+      <p>Destructuring isn't just syntactic sugar—it's a tool for writing predictable code, especially in financial applications where data integrity is critical:</p>
+      
+      <pre><code>// Basic: Simple destructuring
+function processUser(user) {
+const { name, email, profile } = user;
+return { name, email, avatar: profile.avatar };
+}
+
+// Senior approach: Fail-fast destructuring with validation
+function processBankingUser(user) {
+const { 
+  profile: { 
+    contact: { 
+      name, 
+      email,
+      phone = 'Not provided' // Default values
+    } = {} // Nested defaults
+  } = {},
+  account: {
+    balance,
+    currency = 'USD'
+  } = {}
+} = user;
+
+// Validation for critical banking data
+if (typeof balance !== 'number') {
+  throw new Error('Invalid balance data');
+}
+
+return { name, email, phone, balance, currency };
+}
+
+// Advanced: Combined with optional chaining for API responses
+const getTransactionAmount = (transaction) => {
+return transaction?.details?.amount?.value ?? 0;
+};</code></pre>
+      
+      <h3>Async/Await Error Handling Patterns for Enterprise</h3>
+      <p>I've standardized on these patterns across international teams, particularly crucial for banking applications where transaction integrity is paramount:</p>
+      
+      <pre><code>// Pattern 1: Result object for predictable error handling
+async function fetchTransactionData(transactionId) {
+try {
+  const response = await fetch(\`/api/transactions/\${transactionId}\`);
+  if (!response.ok) {
+    throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
+  }
+  const data = await response.json();
+  return { success: true, data, timestamp: Date.now() };
+} catch (error) {
+  // Log to monitoring system (Datadog/Sentry)
+  captureError(error, { transactionId, component: 'TransactionService' });
+  return { 
+    success: false, 
+    error: error.message,
+    userMessage: 'Unable to load transaction details'
+  };
+}
+}
+
+// Pattern 2: Higher-order function for consistent error handling
+const withBankingErrorBoundary = (asyncFn, context = {}) => async (...args) => {
+try {
+  const startTime = performance.now();
+  const result = await asyncFn(...args);
+  const endTime = performance.now();
+  
+  // Log performance metrics
+  logPerformance(\`\${context.operationName}\`, endTime - startTime);
+  
+  return result;
+} catch (error) {
+  // Enhanced error capturing for financial applications
+  captureBankingError(error, {
+    operation: context.operationName,
+    userId: getCurrentUserId(),
+    timestamp: new Date().toISOString()
+  });
+  
+  // Re-throw with enriched context
+  throw new Error(\`\${context.operationName} failed: \${error.message}\`);
+}
+}
+
+// Usage in banking context
+const safeTransferFunds = withBankingErrorBoundary(transferFunds, {
+operationName: 'FundsTransfer'
+});</code></pre>
+      
+      <h3>Module Architecture for Large-Scale Applications</h3>
+      <p>ES6 modules enable sophisticated code organization strategies that scale across multiple teams and products. Here's the pattern I implemented at Hardcore Biometric for police force applications:</p>
+      
+      <pre><code>// Instead of monolithic exports, use domain-driven structure
+// packages/auth/index.js - Authentication domain
+export { default as AuthProvider } from './AuthProvider';
+export { useAuth } from './useAuth';
+export { loginSchema, registerSchema } from './validation';
+
+// packages/transactions/index.js - Transaction domain  
+export { TransactionList } from './TransactionList';
+export { TransactionDetails } from './TransactionDetails';
+export { useTransactionMutation } from './useTransactionMutation';
+
+// packages/ui/index.js - Shared components with barrel exports
+export { Button } from './Button';
+export { Input } from './Input';
+export { DataTable } from './DataTable';
+export { LoadingState } from './LoadingState';
+
+// Strategic default exports for primary components
+export { default as DashboardLayout } from './DashboardLayout';</code></pre>
+      
+      <h3>Performance-Conscious Modern JavaScript</h3>
+      <p>Not all modern features are created equal when building performance-critical applications:</p>
+      <ul>
+        <li><strong>Arrow functions in React:</strong> Can break memoization—use them strategically with useCallback for event handlers</li>
+        <li><strong>Template literals in hot paths:</strong> Can be slower than concatenation—profile first in performance-critical banking transaction code</li>
+        <li><strong>Destructuring in loops:</strong> Can impact garbage collection—be mindful in high-frequency trading interfaces</li>
+        <li><strong>Object spread in reducers:</strong> Can cause unnecessary re-renders—consider immer for complex state updates</li>
+      </ul>
+      
+      <h3>Real-World Impact</h3>
+      <p>By systematically implementing these patterns at Formplus during our AngularJS to React migration, we achieved:</p>
+      <ul>
+        <li>60% reduction in runtime errors through better error handling</li>
+        <li>40% improvement in developer onboarding time with clear module boundaries</li>
+        <li>65% reduction in page load time through performance-conscious patterns</li>
+        <li>Maintained 90%+ test coverage across the entire codebase</li>
+      </ul>
+      
+      <p>The true value of modern JavaScript emerges when these features work together to create robust, maintainable architectures. I've seen teams reduce bug rates by 60% and improve performance metrics by adopting these patterns systematically across their applications.</p>
+    `,
+    date: "2024-01-05",
+    readTime: "12 min read",
+    category: "JavaScript",
+    featured: false,
+    author: "Nurudeen Yekeen",
+    tags: ["JavaScript", "ES6", "Architecture", "Patterns", "Performance", "Enterprise", "Banking"]
+  },
+  {
+    id: 4,
+    title: "Advanced TypeScript Patterns for Enterprise Applications",
+    excerpt: "Master sophisticated TypeScript patterns that scale beautifully in large codebases and prevent common pitfalls in financial and high-compliance environments.",
+    content: `
+          <p>TypeScript has evolved from a nice-to-have to an essential tool for building maintainable enterprise-scale applications. However, many teams only scratch the surface of its capabilities. Through my work on banking applications at Banque Mist and biometric systems for law enforcement, I've developed advanced patterns that ensure type safety while maintaining development velocity.</p>
+          
+          <h3>Utility Types and Conditional Types for Domain Modeling</h3>
+          <p>Leverage TypeScript's built-in utility types and create your own conditional types for type-safe abstractions in complex domains:</p>
+          <pre><code>// Advanced utility type composition for banking domain
+type DeepPartial<T> = T extends object ? {
+  [P in keyof T]?: DeepPartial<T[P]>;
+} : T;
+
+// Banking-specific API response patterns
+type ApiResponse<T> = {
+  data: T;
+  meta: {
+      page: number;
+      total: number;
+      currency: string; // Banking context
+  };
+  errors?: Array<{ code: string; message: string }>;
+};
+
+// Conditional type based on environment and compliance requirements
+type Config<T extends 'development' | 'production' | 'compliance'> = 
+  T extends 'development' 
+      ? { debug: true; verboseLogging: boolean; mockBankingApis: boolean }
+      : T extends 'production' 
+      ? { debug: false; cacheTTL: number; auditTrail: boolean }
+      : { debug: false; dataRetention: number; regulatoryCompliance: string };
+
+// Real-world usage in banking application
+const productionConfig: Config<'production'> = {
+  debug: false,
+  cacheTTL: 3600,
+  auditTrail: true // Required for financial regulations
+};</code></pre>
+          
+          <h3>Branded Types for Runtime Safety in Financial Systems</h3>
+          <p>Create nominal typing in TypeScript's structural type system to prevent primitive obsession bugs in critical financial operations:</p>
+          <pre><code>// Branded types for domain primitives in banking
+type UserId = string & { readonly brand: unique symbol };
+type AccountNumber = string & { readonly brand: unique symbol };
+type TransactionAmount = number & { readonly brand: unique symbol };
+type Currency = 'USD' | 'EUR' | 'GBP' | 'EGP';
+
+// Factory functions with validation
+const createUserId = (id: string): UserId => {
+  if (!/^[a-zA-Z0-9-]+$/.test(id)) {
+      throw new Error('Invalid user ID format');
+  }
+  return id as UserId;
+};
+
+const createAccountNumber = (number: string): AccountNumber => {
+  if (!/^[0-9]{8,12}$/.test(number)) {
+      throw new Error('Invalid account number format');
+  }
+  return number as AccountNumber;
+};
+
+const createTransactionAmount = (amount: number, currency: Currency): TransactionAmount => {
+  if (amount < 0) {
+      throw new Error('Transaction amount cannot be negative');
+  }
+  if (currency === 'USD' && amount > 100000) {
+      throw new Error('Amount exceeds single transaction limit');
+  }
+  return amount as TransactionAmount;
+};
+
+// Compile-time safety for banking operations
+const transferFunds = (from: AccountNumber, to: AccountNumber, amount: TransactionAmount) => {
+  // Implementation with type-safe parameters
+};
+
+// These are now compile-time errors:
+const userId: UserId = 'user123'; // Error: Type 'string' is not assignable
+const account: AccountNumber = '12345678'; // Error: Type 'string' is not assignable</code></pre>
+          
+          <h3>Advanced Generic Constraints for Reusable Banking Components</h3>
+          <p>Use complex generic constraints to create flexible yet type-safe APIs for financial data processing:</p>
+          <pre><code>// Entity base for banking domain
+interface BankingEntity {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  version: number; // Optimistic locking for transactions
+}
+
+interface Account extends BankingEntity {
+  accountNumber: AccountNumber;
+  balance: number;
+  currency: Currency;
+  status: 'active' | 'suspended' | 'closed';
+}
+
+// Constrained repository pattern for different entity types
+interface BankingRepository<T extends BankingEntity, K extends keyof T> {
+  getById(id: string): Promise<T>;
+  findBy(field: K, value: T[K]): Promise<T[]>;
+  update(entity: Partial<T> & Pick<T, 'id'>): Promise<T>;
+  auditTrail(entityId: string): Promise<AuditEvent[]>; // Banking compliance requirement
+}
+
+// Factory function with full type inference
+function createBankingRepository<T extends BankingEntity>(): BankingRepository<T, keyof T> {
+  return {
+      getById: async (id) => {
+          // Implementation with banking-specific error handling
+          const entity = await fetchFromBankingAPI(id);
+          return entity;
+      },
+      findBy: async (field, value) => {
+          // Type-safe field access
+          return await queryBankingDatabase(field as string, value);
+      },
+      update: async (entity) => {
+          // Optimistic locking implementation
+          const current = await getById(entity.id);
+          if (current.version !== entity.version) {
+              throw new Error('Concurrent modification detected');
+          }
+          return await saveToBankingDatabase({ ...entity, version: current.version + 1 });
+      },
+      auditTrail: async (entityId) => {
+          // Compliance requirement for all banking operations
+          return await fetchAuditEvents(entityId);
+      }
+  };
+}</code></pre>
+          
+          <h3>Template Literal Types for Type-Safe Banking APIs</h3>
+          <p>Use template literal types to create type-safe API routing systems that prevent runtime errors in financial applications:</p>
+          <pre><code>type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type BankingResource = 'accounts' | 'transactions' | 'users' | 'audit-logs';
+type BankingAction = 'transfer' | 'withdraw' | 'deposit' | 'balance';
+
+// Type-safe API route generation
+type BankingApiRoute = 
+  | \`/\${BankingResource}\`
+  | \`/\${BankingResource}/\${string}\`
+  | \`/\${BankingResource}/\${string}/\${BankingAction}\`;
+
+type BankingRouteConfig = {
+  [K in BankingApiRoute]: {
+      methods: HttpMethod[];
+      validation?: Record<string, unknown>;
+      requiresAuth: boolean;
+      permissionLevel: 'user' | 'admin' | 'auditor';
+  };
+};
+
+// Fully type-safe route configuration for banking application
+const bankingRoutes: BankingRouteConfig = {
+  '/accounts': { 
+      methods: ['GET', 'POST'], 
+      requiresAuth: true, 
+      permissionLevel: 'user' 
+  },
+  '/accounts/:id': { 
+      methods: ['GET', 'PUT'], 
+      requiresAuth: true, 
+      permissionLevel: 'user' 
+  },
+  '/accounts/:id/transfer': { 
+      methods: ['POST'], 
+      requiresAuth: true, 
+      permissionLevel: 'user',
+      validation: transferSchema 
+  },
+  '/audit-logs': { 
+      methods: ['GET'], 
+      requiresAuth: true, 
+      permissionLevel: 'auditor' 
+  },
+  // '/products' would be a compile-time error - not a valid banking resource
+};
+
+// Type-safe API client generation
+type BankingApiClient = {
+  [K in keyof typeof bankingRoutes]: {
+      [M in typeof bankingRoutes[K]['methods'][number]]: 
+          (payload?: any) => Promise<any>;
+  };
+};</code></pre>
+          
+          <h3>Real-World Impact in Production</h3>
+          <p>Implementing these patterns in our Banque Mist migration resulted in:</p>
+          <ul>
+              <li>90% reduction in runtime type-related errors</li>
+              <li>40% faster onboarding for new developers due to self-documenting types</li>
+              <li>Catch compliance violations at compile time rather than production</li>
+              <li>Enable confident refactoring of complex financial logic</li>
+          </ul>
+          
+          <p>Mastering these advanced TypeScript patterns will elevate your code quality, catch critical financial errors at compile time, and make your codebase significantly more maintainable as it scales to handle millions of banking transactions and users.</p>
+        `,
+    date: "2024-02-01",
+    readTime: "14 min read",
+    category: "TypeScript",
+    featured: false,
+    author: "Nurudeen Yekeen",
+    tags: ["TypeScript", "Enterprise", "Patterns", "Type Safety", "Banking", "Financial Systems"]
+  }
 ];

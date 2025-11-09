@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ArticleDetail.css';
 import { articles } from '../../constant/articles';
@@ -7,7 +7,14 @@ const ArticleDetail = () => {
     const { id } = useParams();
 
     const article = articles.find(art => art.id === parseInt(id));
-    
+    const currentIndex = articles.findIndex(art => art.id === parseInt(id));
+    const hasNext = currentIndex !== -1 && currentIndex < articles.length - 1;
+    const nextArticle = hasNext ? articles[currentIndex + 1] : null;
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "instant" });
+    }, [id]);
+
     if (article?.id == undefined) {
         return (
             <div className="article-detail-container">
@@ -60,7 +67,19 @@ const ArticleDetail = () => {
                         className="article-body"
                         dangerouslySetInnerHTML={{ __html: article.content }}
                     />
+                  
                 </article>
+                {nextArticle && (
+                        <div className="article-next-nav">
+                            <Link
+                                className="next-article-button"
+                                to={`/articles/${nextArticle.id}`}
+                                >
+                                <span className="next-article-title">{nextArticle.title}</span>
+                                <span className="next-article-arrow">→</span>
+                            </Link>
+                        </div>
+                    )}
             </div>
         </div>
     );
