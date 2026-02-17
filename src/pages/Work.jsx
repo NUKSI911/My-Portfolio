@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Work.css';
-import Project from '../utils/project/Project';
+import '@/pages/Work.css';
+import Project from '@/components/molecules/Project';
 import uuid from 'react-uuid';
 
 const Work = ({ activeMenu }) => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './Form.css'
-import Success from '../../contact/Success'
+import '@/components/organisms/Form.css'
+import Success from '@/components/molecules/Success'
 
 export class Form extends Component {
 
@@ -31,24 +31,24 @@ export class Form extends Component {
           <div className="form_section">
             <label>
               <span>Your Email*</span>
-              <input required type="email" name="email"  />
+              <input required type="email" name="email" />
             </label>
           </div>
 
           <div className="form_section">
             <label>
               <span>Your Message*</span>
-              <textarea required name="message" rows="10"  minLength="10" ></textarea>
+              <textarea required name="message" rows="10" minLength="10" ></textarea>
             </label>
           </div>
 
           <div className="form_section">
-            <button type='submit' > { !loading ? "Shoot" : <i class="fas fa-ellipsis-h"></i> } </button>
+            <button type='submit' > {!loading ? "Shoot" : <i class="fas fa-ellipsis-h"></i>} </button>
           </div>
         </form>
 
         {status === "SUCCESS" ? <Success display={this.setStatus.bind(this)} /> : ''}
-        {status === "ERROR" && <p style={{textAlign: 'center', color: 'red'}}> <b>Ooops! There was an error.</b></p>}
+        {status === "ERROR" && <p style={{ textAlign: 'center', color: 'red' }}> <b>Ooops! There was an error.</b></p>}
 
       </div>
     )
@@ -57,7 +57,7 @@ export class Form extends Component {
   submitForm(ev) {
     ev.preventDefault();
 
-    this.setState({loading: true});
+    this.setState({ loading: true });
 
     const form = ev.target;
     const data = new FormData(form);
@@ -77,7 +77,7 @@ export class Form extends Component {
   }
 
   setStatus() {
-    this.setState({status: ""});
+    this.setState({ status: "" });
   }
 
 }

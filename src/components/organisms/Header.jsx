@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import logo from '../../../assets/svgs/nurudeen.svg'
+import { useState } from 'react'
+import logo from '@/assets/svgs/nurudeen.svg'
 import { Link } from 'react-router-dom'
-import './Header.css'
+import '@/components/organisms/Header.css'
 
 const Header = () => {
   const [closed, setClosed] = useState(true);
@@ -14,18 +14,18 @@ const Header = () => {
     <div id='header'>
       <div className="header_wrapper">
         <div className="logo_container">
-          <Link to={"/"}><img src={logo} alt="nurudeen logo" height="50"/></Link>
+          <Link to={"/"}><img src={logo} alt="nurudeen logo" height="50" /></Link>
         </div>
 
         <div className="menu_btn_wrapper">
-          <button className={closed? 'menu_btn' : 'menu_btn menu_btn_open'} onClick={toggleMenu}>
+          <button className={closed ? 'menu_btn' : 'menu_btn menu_btn_open'} onClick={toggleMenu}>
             <div className="menu_btn_line"></div>
             <div className="menu_btn_line"></div>
           </button>
         </div>
       </div>
 
-      { 
+      {
         !closed ? (
           <nav>
             <div className="mobile_menu_container">
@@ -38,9 +38,9 @@ const Header = () => {
               </ul>
 
               <div className="social_box">
-              <h3>Connect With Me</h3>
+                <h3>Connect With Me</h3>
                 <div className="social_icons">
-                  <a href="https://github.com/nurudeen38"><i className='fab fa-github'></i></a> 
+                  <a href="https://github.com/nurudeen38"><i className='fab fa-github'></i></a>
                   <a href="https://x.com/shadeof_deen"><i className='fab fa-twitter'></i></a>
                   <a href="https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/"><i className="fab fa-linkedin"></i></a>
                 </div>

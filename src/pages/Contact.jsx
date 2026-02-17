@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Form from "../utils/form/Form";
-import "./Contact.css";
+import Form from "@/components/organisms/Form";
+import "@/pages/Contact.css";
 
 const Contact = ({ activeMenu }) => {
   useEffect(() => {

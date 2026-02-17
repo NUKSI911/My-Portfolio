@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch } from "react-router";
-import "./App.css";
-import Base from "./components/base/Base";
-import Work from "./components/work/Work";
-import Resume from "./components/resume/Resume";
-import Contact from "./components/contact/Contact";
-import Mobile from "./components/base/Mobile";
-import Header from "./components/utils/header/Header";
-import Error from "./components/error404/Error";
-import Articles from "./components/blog/Blog";
-import ArticleDetail from "./components/blog/ArticleDetail";
+import "@/App.css";
+import MainLayout from "@/components/templates/MainLayout";
+import MobileLayout from "@/components/templates/MobileLayout";
+import Header from "@/components/organisms/Header";
 import { Helmet } from "react-helmet";
+import LoadingSpinner from "@/components/atoms/LoadingSpinner";
+
+const Work = lazy(() => import("./pages/Work"));
+const Resume = lazy(() => import("./pages/Resume"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Error = lazy(() => import("./pages/Error"));
+const Articles = lazy(() => import("./pages/Blog"));
+const ArticleDetail = lazy(() => import("./pages/ArticleDetail"));
 
 const App = () => {
   const [menu, setMenu] = useState(["active_menu", "", "", ""]);
@@ -65,187 +67,193 @@ const App = () => {
         <meta property='twitter:site' content='@nurudeenyekeen1' />
         <meta property='twitter:title' content='Nurudeen Yekeen Portfolio' />
         <meta property='twitter:description' content='Frontend Developer' />
-        </Helmet>
+      </Helmet>
       <Router>
-        <Switch>
-          {/* Article Detail Route - Without Header */}
-          <Route
-            exact
-            path='/articles/:id'
-            component={ArticleDetail}
-          />
-          
-          {/* All other routes with header */}
-          <Route path="/">
-            <div
-              className='mobile_container'
-              id={fullScreen ? 'fullscreen' : ''}>
-              <Header />
-              <div>
-                <Switch>
-                  <Route
-                    exact
-                    path='/'
-                    render={(props) => (
-                      <Mobile
-                        menu={menu}
-                        fullScreen={setFullscreen}
+        <Suspense fallback={<LoadingSpinner />}>
+          <Switch>
+            {/* Article Detail Route - Without Header */}
+            <Route
+              exact
+              path='/articles/:id'
+              component={ArticleDetail}
+            />
+
+            {/* All other routes with header */}
+            <Route path="/">
+              <div
+                className='mobile_container'
+                id={fullScreen ? 'fullscreen' : ''}>
+                <Header />
+                <div>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Switch>
+                      <Route
+                        exact
+                        path='/'
+                        render={(props) => (
+                          <MobileLayout
+                            menu={menu}
+                            fullScreen={setFullscreen}
+                          />
+                        )}
                       />
-                    )}
-                  />
 
-                  <Route
-                    exact
-                    path='/work'
-                    render={(props) => (
-                      <Work
-                        menu={menu}
-                        activeMenu={activeMenu}
+                      <Route
+                        exact
+                        path='/work'
+                        render={(props) => (
+                          <Work
+                            menu={menu}
+                            activeMenu={activeMenu}
+                          />
+                        )}
                       />
-                    )}
-                  />
 
-                  <Route
-                    exact
-                    path='/resume'
-                    render={(props) => (
-                      <Resume
-                        menu={menu}
-                        activeMenu={activeMenu}
+                      <Route
+                        exact
+                        path='/resume'
+                        render={(props) => (
+                          <Resume
+                            menu={menu}
+                            activeMenu={activeMenu}
+                          />
+                        )}
                       />
-                    )}
-                  />
 
-                  <Route
-                    exact
-                    path='/contact'
-                    render={(props) => (
-                      <Contact
-                        menu={menu}
-                        activeMenu={activeMenu}
+                      <Route
+                        exact
+                        path='/contact'
+                        render={(props) => (
+                          <Contact
+                            menu={menu}
+                            activeMenu={activeMenu}
+                          />
+                        )}
                       />
-                    )}
-                  />
 
-                  <Route
-                    exact
-                    path='/articles'
-                    render={(props) => (
-                      <Articles
-                        menu={menu}
-                        activeMenu={activeMenu}
+                      <Route
+                        exact
+                        path='/articles'
+                        render={(props) => (
+                          <Articles
+                            menu={menu}
+                            activeMenu={activeMenu}
+                          />
+                        )}
                       />
-                    )}
-                  />
 
-                  <Route component={Error} />
-                </Switch>
-              </div>
+                      <Route component={Error} />
+                    </Switch>
+                  </Suspense>
+                </div>
 
-              <div className='social_buttons'>
-                <a
-                  href='https://github.com/nurudeen38'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <i className='fab fa-github'></i>
-                </a>
-                <a
-                  href='https://x.com/shadeof_deen'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <i className='fab fa-twitter'></i>
-                </a>
-                <a
-                  href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  <i className='fab fa-linkedin'></i>
-                </a>
+                <div className='social_buttons'>
+                  <a
+                    href='https://github.com/nurudeen38'
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <i className='fab fa-github'></i>
+                  </a>
+                  <a
+                    href='https://x.com/shadeof_deen'
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <i className='fab fa-twitter'></i>
+                  </a>
+                  <a
+                    href='https://www.linkedin.com/in/nurudeen-yekeen-2a9a88154/'
+                    target='_blank'
+                    rel='noopener noreferrer'>
+                    <i className='fab fa-linkedin'></i>
+                  </a>
 
-                <div className='credits'>
-                  <p>
-                    Inspired by
-                    <a
-                      href='https://sarahdayan.dev/'
-                      target='_blank'
-                      rel='noreferrer noopener'>
-                      Sarah Dayan
-                    </a>
-                  </p>
+                  <div className='credits'>
+                    <p>
+                      Inspired by
+                      <a
+                        href='https://sarahdayan.dev/'
+                        target='_blank'
+                        rel='noreferrer noopener'>
+                        Sarah Dayan
+                      </a>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className='container'>
-              <div className='fixed'>
-                <Base menu={menu} />
-              </div>
+              <div className='container'>
+                <div className='fixed'>
+                  <MainLayout menu={menu} />
+                </div>
 
-              <div className='main'>
-                <div className='pages_container'>
-                  <Switch>
-                    <Route
-                      exact
-                      path='/'
-                      render={(props) => (
-                        <Work
-                          menu={menu}
-                          activeMenu={activeMenu}
+                <div className='main'>
+                  <div className='pages_container'>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Switch>
+                        <Route
+                          exact
+                          path='/'
+                          render={(props) => (
+                            <Work
+                              menu={menu}
+                              activeMenu={activeMenu}
+                            />
+                          )}
                         />
-                      )}
-                    />
 
-                    <Route
-                      exact
-                      path='/work'
-                      render={(props) => (
-                        <Work
-                          menu={menu}
-                          activeMenu={activeMenu}
+                        <Route
+                          exact
+                          path='/work'
+                          render={(props) => (
+                            <Work
+                              menu={menu}
+                              activeMenu={activeMenu}
+                            />
+                          )}
                         />
-                      )}
-                    />
 
-                    <Route
-                      exact
-                      path='/resume'
-                      render={(props) => (
-                        <Resume
-                          menu={menu}
-                          activeMenu={activeMenu}
+                        <Route
+                          exact
+                          path='/resume'
+                          render={(props) => (
+                            <Resume
+                              menu={menu}
+                              activeMenu={activeMenu}
+                            />
+                          )}
                         />
-                      )}
-                    />
 
-                    <Route
-                      exact
-                      path='/contact'
-                      render={(props) => (
-                        <Contact
-                          menu={menu}
-                          activeMenu={activeMenu}
+                        <Route
+                          exact
+                          path='/contact'
+                          render={(props) => (
+                            <Contact
+                              menu={menu}
+                              activeMenu={activeMenu}
+                            />
+                          )}
                         />
-                      )}
-                    />
 
-                    <Route
-                      exact
-                      path='/articles'
-                      render={(props) => (
-                        <Articles
-                          menu={menu}
-                          activeMenu={activeMenu}
+                        <Route
+                          exact
+                          path='/articles'
+                          render={(props) => (
+                            <Articles
+                              menu={menu}
+                              activeMenu={activeMenu}
+                            />
+                          )}
                         />
-                      )}
-                    />
 
-                    <Route component={Error} />
-                  </Switch>
+                        <Route component={Error} />
+                      </Switch>
+                    </Suspense>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </div>
   );

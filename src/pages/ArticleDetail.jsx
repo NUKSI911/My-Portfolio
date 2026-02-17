@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './ArticleDetail.css';
-import { articles } from '../../constant/articles';
+import '@/pages/ArticleDetail.css';
+import { articles } from "@/constants/articles";
 
 const ArticleDetail = () => {
     const { id } = useParams();
@@ -67,19 +67,19 @@ const ArticleDetail = () => {
                         className="article-body"
                         dangerouslySetInnerHTML={{ __html: article.content }}
                     />
-                  
+
                 </article>
                 {nextArticle && (
-                        <div className="article-next-nav">
-                            <Link
-                                className="next-article-button"
-                                to={`/articles/${nextArticle.id}`}
-                                >
-                                <span className="next-article-title">{nextArticle.title}</span>
-                                <span className="next-article-arrow">→</span>
-                            </Link>
-                        </div>
-                    )}
+                    <div className="article-next-nav">
+                        <Link
+                            className="next-article-button"
+                            to={`/articles/${nextArticle.id}`}
+                        >
+                            <span className="next-article-title">{nextArticle.title}</span>
+                            <span className="next-article-arrow">→</span>
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     );

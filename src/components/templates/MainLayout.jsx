@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Base.css";
-import avi from "../../assets/img/deen_big.png";
-import navLine from "../../assets/svgs/menu-line.svg";
-import logo from "../../assets/img/smallavi.png";
-import arrow from "../../assets/svgs/arrow.svg";
+import "@/components/templates/MainLayout.css";
+import avi from "@/assets/img/deen_big.png";
+import navLine from "@/assets/svgs/menu-line.svg";
+import logo from "@/assets/img/smallavi.png";
+import arrow from "@/assets/svgs/arrow.svg";
 
-const Base = ({ menu }) => {
+const MainLayout = ({ menu }) => {
   return (
     <div className='base_container'>
       <div className='hero'>
@@ -104,4 +104,4 @@ const Base = ({ menu }) => {
   );
 };
 
-export default Base;
+export default MainLayout;

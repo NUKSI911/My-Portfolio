@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import './Project.css'
+import '@/components/molecules/Project.css'
 
 export class Project extends Component {
   render() {
 
-    const {title, description, github, live, stack, isPrivate} = this.props.data;
+    const { title, description, github, live, stack, isPrivate } = this.props.data;
 
     return (
       <div className='box_container'>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Error.css'
+import '@/pages/Error.css'
 import { Link } from 'react-router-dom'
 
 export class Error extends Component {
