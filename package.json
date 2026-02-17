@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && vite build",
+    "build": " vite build",
     "preview": "vite preview"
   },
   "eslintConfig": {
